@@ -5,6 +5,7 @@
     "tasks": [
       {
         "_id": "1",
+        "_columnId": "1",
         "title": "First Task",
         "description": "Buy ingredients for breakfast.",
         "color": "",
@@ -13,6 +14,7 @@
       },
       {
         "_id": "2",
+        "_columnId": "1",
         "title": "Second Task",
         "description": "Prepare the kitchen for cooking.",
         "color": "",
@@ -21,6 +23,7 @@
       },
       {
         "_id": "3",
+        "_columnId": "1",
         "title": "Third Task",
         "description": "Chop vegetables and fruits.",
         "color": "",
@@ -29,6 +32,7 @@
       },
       {
         "_id": "4",
+        "_columnId": "1",
         "title": "Fourth Task",
         "description": "Cook eggs and bacon.",
         "color": "",
@@ -37,6 +41,7 @@
       },
       {
         "_id": "5",
+        "_columnId": "1",
         "title": "Fifth Task",
         "description": "Make coffee or tea.",
         "color": "",

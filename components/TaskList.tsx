@@ -5,8 +5,6 @@ import data from "@/data/mock.json";
 interface Props {
   taskList: ITaskModel[];
   isDragAllowed: boolean;
-  onAnimationStart?: (definition: AnimationDefinition) => void;
-  onAnimationEnd?: (event: unknown) => void;
 }
 
 const TaskList = (props: Props) => {

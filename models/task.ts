@@ -2,6 +2,7 @@ interface ITaskDTO {}
 
 interface ITaskModel {
   _id: string;
+  _columnId: string;
   title: string;
   description: string;
   color: string;
@@ -12,6 +13,7 @@ interface ITaskModel {
 class TaskModel implements ITaskModel {
   _id: string;
   title: string;
+  _columnId: string;
   description: string;
   color: string;
   priority: string;
@@ -19,6 +21,7 @@ class TaskModel implements ITaskModel {
 
   constructor(task: ITaskModel) {
     this._id = task._id;
+    this._columnId = task._columnId;
     this.title = task.title;
     this.description = task.description;
     this.color = task.color;

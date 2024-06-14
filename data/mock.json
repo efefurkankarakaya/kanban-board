@@ -1,0 +1,82 @@
+[
+  {
+    "id": "1",
+    "title": "First Task",
+    "description": "Buy ingredients for breakfast.",
+    "color": "",
+    "priority": "",
+    "tags": []
+  },
+  {
+    "id": "2",
+    "title": "Second Task",
+    "description": "Prepare the kitchen for cooking.",
+    "color": "",
+    "priority": "",
+    "tags": []
+  },
+  {
+    "id": "3",
+    "title": "Third Task",
+    "description": "Chop vegetables and fruits.",
+    "color": "",
+    "priority": "",
+    "tags": []
+  },
+  {
+    "id": "4",
+    "title": "Fourth Task",
+    "description": "Cook eggs and bacon.",
+    "color": "",
+    "priority": "",
+    "tags": []
+  },
+  {
+    "id": "5",
+    "title": "Fifth Task",
+    "description": "Make coffee or tea.",
+    "color": "",
+    "priority": "",
+    "tags": []
+  },
+  {
+    "id": "6",
+    "title": "Sixth Task",
+    "description": "Toast the bread.",
+    "color": "",
+    "priority": "",
+    "tags": []
+  },
+  {
+    "id": "7",
+    "title": "Seventh Task",
+    "description": "Set the table.",
+    "color": "",
+    "priority": "",
+    "tags": []
+  },
+  {
+    "id": "8",
+    "title": "Eighth Task",
+    "description": "Serve breakfast.",
+    "color": "",
+    "priority": "",
+    "tags": []
+  },
+  {
+    "id": "9",
+    "title": "Ninth Task",
+    "description": "Clean up the kitchen.",
+    "color": "",
+    "priority": "",
+    "tags": []
+  },
+  {
+    "id": "10",
+    "title": "Tenth Task",
+    "description": "Store leftovers properly.",
+    "color": "",
+    "priority": "",
+    "tags": []
+  }
+]

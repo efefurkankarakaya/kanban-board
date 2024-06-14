@@ -1,9 +1,9 @@
 "use client";
 
+import { useCallback, useState } from "react";
 import { Reorder } from "framer-motion";
 import { RiDraggable } from "react-icons/ri";
 import TaskList from "./TaskList";
-import { useCallback, useState } from "react";
 
 interface Props {
   data: IColumnModel;
@@ -22,14 +22,14 @@ const Column = ({ data }: Props) => {
 
   return (
     <Reorder.Item
-      className="w-48 bg-task-list p-4 rounded-lg mr-5"
+      className="w-64 bg-task-list p-4 rounded-lg mr-5"
       key={data._id}
       value={data}
       dragListener={isDragMode}
       onDragEnd={onDragEnd}
     >
       <div className="flex flex-row justify-between items-center">
-        <h3 className="text-white text-3xl font-semibold mb-3">Backlog</h3>
+        <h3 className="text-white text-3xl font-semibold mb-3">{data.title}</h3>
         <RiDraggable
           onMouseMove={onClickDragButton}
           className="cursor-pointer"

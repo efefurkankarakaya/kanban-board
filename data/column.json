@@ -1,6 +1,7 @@
 [
   {
     "_id": "1",
+    "_boardId": "1",
     "title": "Backlog",
     "tasks": [
       {
@@ -52,6 +53,7 @@
   },
   {
     "_id": "2",
+    "_boardId": "1",
     "title": "To do",
     "tasks": []
   }

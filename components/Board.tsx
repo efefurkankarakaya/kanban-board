@@ -1,25 +1,56 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Reorder } from "framer-motion";
+import data from "@/data/column.json";
+import TaskList from "./TaskList";
+import { RiDraggable } from "react-icons/ri";
 
 const Board = () => {
-  const [items, setItems] = useState([0, 1, 2, 3]);
+  const [columns, setColumns] = useState(data);
+  const [isDragMode, setIsDragMode] = useState(false);
+
+  const onClickDragButton = useCallback(() => {
+    setIsDragMode(true);
+  }, [setIsDragMode]);
+
+  const onDragEnd = useCallback(() => {
+    setIsDragMode(false);
+  }, [setIsDragMode]);
 
   return (
-    <Reorder.Group
-      axis="x"
-      values={items}
-      onReorder={setItems}
-    >
-      {items.map((item) => (
-        <Reorder.Item
-          key={item}
-          value={item}
-        >
-          {item}
-        </Reorder.Item>
-      ))}
-    </Reorder.Group>
+    <div>
+      <Reorder.Group
+        className="flex flex-row"
+        axis="x"
+        values={columns}
+        onReorder={setColumns}
+      >
+        {columns.map((column) => (
+          <Reorder.Item
+            className="w-48 bg-task-list p-4 rounded-lg mr-5"
+            key={column._id}
+            value={column}
+            dragListener={isDragMode}
+            onDragEnd={onDragEnd}
+          >
+            <div className="flex flex-row justify-between items-center">
+              <h3 className="text-white text-3xl font-semibold mb-3">Backlog</h3>
+              <RiDraggable
+                onMouseMove={onClickDragButton}
+                className="cursor-pointer"
+                size={18}
+              />
+            </div>
+            <TaskList
+              taskList={column.tasks}
+              isDragAllowed={!isDragMode}
+            />
+          </Reorder.Item>
+        ))}
+      </Reorder.Group>
+    </div>
   );
 };
+
+export default Board;

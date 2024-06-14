@@ -1,0 +1,53 @@
+[
+  {
+    "_id": "1",
+    "title": "Backlog",
+    "tasks": [
+      {
+        "_id": "1",
+        "title": "First Task",
+        "description": "Buy ingredients for breakfast.",
+        "color": "",
+        "priority": "",
+        "tags": []
+      },
+      {
+        "_id": "2",
+        "title": "Second Task",
+        "description": "Prepare the kitchen for cooking.",
+        "color": "",
+        "priority": "",
+        "tags": []
+      },
+      {
+        "_id": "3",
+        "title": "Third Task",
+        "description": "Chop vegetables and fruits.",
+        "color": "",
+        "priority": "",
+        "tags": []
+      },
+      {
+        "_id": "4",
+        "title": "Fourth Task",
+        "description": "Cook eggs and bacon.",
+        "color": "",
+        "priority": "",
+        "tags": []
+      },
+      {
+        "_id": "5",
+        "title": "Fifth Task",
+        "description": "Make coffee or tea.",
+        "color": "",
+        "priority": "",
+        "tags": []
+      }
+    ]
+  },
+  {
+    "_id": "2",
+    "title": "To do",
+    "tasks": []
+  }
+]

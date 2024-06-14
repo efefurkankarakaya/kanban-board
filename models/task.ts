@@ -1,5 +1,3 @@
-interface ITaskDTO {}
-
 interface ITaskModel {
   _id: string;
   _columnId: string;

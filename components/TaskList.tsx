@@ -1,6 +1,8 @@
-import { AnimationDefinition, Reorder } from "framer-motion";
+"use client";
+
+import { Reorder } from "framer-motion";
 import { useState } from "react";
-import data from "@/data/mock.json";
+import Task from "./Task";
 
 interface Props {
   taskList: ITaskModel[];
@@ -8,28 +10,22 @@ interface Props {
 }
 
 const TaskList = (props: Props) => {
-  const [items, setItems] = useState(props.taskList || data); // TODO: Remove 'data' here
+  const [items, setItems] = useState(props.taskList);
 
   return (
-    <div className="">
-      <Reorder.Group
-        axis="y"
-        values={items}
-        onReorder={setItems}
-      >
-        {items.map((item) => (
-          <Reorder.Item
-            className="p-4 bg-task-pink mb-3 rounded-md cursor-pointer"
-            key={item._id}
-            value={item}
-            onPointerDownCapture={(e) => !props.isDragAllowed && e.stopPropagation()} // To prevent drag simultaneously with the parent component
-          >
-            <h4 className="text-xs mb-1">{item.title}</h4>
-            {item.description && <p className="text-xxs font-thin">{item.description}</p>}
-          </Reorder.Item>
-        ))}
-      </Reorder.Group>
-    </div>
+    <Reorder.Group
+      axis="y"
+      values={items}
+      onReorder={setItems}
+    >
+      {items.map((item) => (
+        <Task
+          key={item._id}
+          data={item}
+          isDragAllowed={props.isDragAllowed}
+        />
+      ))}
+    </Reorder.Group>
   );
 };
 

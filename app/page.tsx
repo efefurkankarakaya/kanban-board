@@ -1,18 +1,19 @@
 "use client";
 
-import Board from "@/components/Board";
-import data from "@/data/column.json";
+// import Board from "@/components/Board";
+import Kanban from "@/components/Kanban";
 
 export default function Home() {
   return (
     <main>
-      <Board
+      {/* <Board
         boardData={{
           "_id": "1",
           "_userName": "efk",
           "title": "Roadmap"
         }}
-      />
+      /> */}
+      <Kanban />
     </main>
   );
 }

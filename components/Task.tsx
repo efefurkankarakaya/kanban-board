@@ -1,21 +1,45 @@
-import { Reorder } from "framer-motion";
+"use client";
+
+import { motion } from "framer-motion";
+import DropIndicator from "./DropIndicator";
+import { DragEvent, useCallback } from "react";
+import { ITaskModel } from "@/models/task";
 
 interface Props {
   data: ITaskModel;
-  isDragAllowed: boolean;
+  handleDragStart: (e: DragEvent<HTMLDivElement>, task: ITaskModel) => void;
 }
 
-const Task = (props: Props) => {
+const Task = ({ data, handleDragStart }: Props) => {
+  const { _id, _columnId, title } = data;
+
+  // console.log("Task: ", _id, _columnId);
+
+  const onDragStart = useCallback(
+    (e: DragEvent<HTMLDivElement>) => {
+      console.log(e);
+      handleDragStart(e, data);
+    },
+    [handleDragStart, data]
+  );
+
   return (
-    <Reorder.Item
-      className="p-4 bg-task-pink mb-3 rounded-md cursor-pointer"
-      key={props.data._id}
-      value={props.data}
-      onPointerDownCapture={(e) => !props.isDragAllowed && e.stopPropagation()} // To prevent drag simultaneously with the parent component
-    >
-      <h4 className="text-xs mb-1">{props.data.title}</h4>
-      {props.data.description && <p className="text-xxs font-thin">{props.data.description}</p>}
-    </Reorder.Item>
+    <>
+      <DropIndicator
+        beforeId={_id}
+        columnId={_columnId}
+      />
+      <motion.div
+        layout
+        layoutId={_id}
+        draggable="true"
+        // @ts-ignore: Mismatched type in module declaration onDragStart(event: DragEvent<HTMLDivElement>, info: PanInfo) => void
+        onDragStart={onDragStart} // TODO: Fix type here and move this function above
+        className="cursor-grab rounded border border-neutral-700 bg-neutral-800 p-3 active:cursor-grabbing"
+      >
+        <p className="text-sm text-neutral-100">{title}</p>
+      </motion.div>
+    </>
   );
 };
 

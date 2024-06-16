@@ -1,4 +1,4 @@
-interface ITaskModel {
+export interface ITaskModel {
   _id: string;
   _columnId: string;
   title: string;
@@ -8,7 +8,7 @@ interface ITaskModel {
   tags: string[];
 }
 
-class TaskModel implements ITaskModel {
+export class TaskModel implements ITaskModel {
   _id: string;
   title: string;
   _columnId: string;

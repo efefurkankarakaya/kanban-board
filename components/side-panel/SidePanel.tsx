@@ -1,11 +1,11 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useRef } from "react";
 import SlidingPanel from "react-sliding-side-panel";
 import "react-sliding-side-panel/lib/index.css";
-import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 import useTaskStore from "@/store/task.store";
 import { useClickAway } from "react-use";
+import SidePanelHeader from "./Header";
 
 interface Props {}
 
@@ -16,10 +16,6 @@ const SidePanel = (props: Props) => {
   useClickAway(ref, () => {
     resetTask();
   });
-
-  const onClickRightArrow = useCallback(() => {
-    resetTask();
-  }, [resetTask]);
 
   return (
     <SlidingPanel
@@ -33,13 +29,7 @@ const SidePanel = (props: Props) => {
         className="h-full"
         ref={ref}
       >
-        <div className="w-full p-2">
-          <MdKeyboardDoubleArrowRight
-            onClick={onClickRightArrow}
-            className="text-neutral-500 cursor-pointer"
-            size={23}
-          />
-        </div>
+        <SidePanelHeader />
       </div>
     </SlidingPanel>
   );

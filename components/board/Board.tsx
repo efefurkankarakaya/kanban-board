@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Column from "./Column";
 import { data } from "@/data/tasks";
 import Link from "next/link";
-import SidePanel from "./SidePanel";
+import SidePanel from "../side-panel/SidePanel";
 
 const Board = () => {
   const [tasks, setTasks] = useState(data);

@@ -1,5 +1,5 @@
 // import Board from "@/components/Board";
-import Kanban from "@/components/Kanban";
+import Kanban from "@/components/board/Kanban";
 import { MongoClient, ServerApiVersion } from "mongodb";
 
 const uri = process.env["DATABASE_URI"] as string;

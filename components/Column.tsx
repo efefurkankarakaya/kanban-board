@@ -125,7 +125,7 @@ const Column = ({ title, headingColor, tasks, columnId, setTasks }: Props) => {
   const filteredTasks = useMemo(() => tasks.filter((task) => task._columnId === columnId), [tasks, columnId]);
 
   return (
-    <div className="w-56 shrink-0">
+    <div className={`w-56 shrink-0 h-fit p-4 rounded-lg ${active ? "bg-task-list" : "bg-task-list/50"}`}>
       <div className="mb-3 flex items-center justify-between">
         <h3 className={`font-medium ${headingColor}`}>{title}</h3>
         <span className="rounded text-sm text-neutral-400">{filteredTasks.length}</span>
@@ -134,7 +134,7 @@ const Column = ({ title, headingColor, tasks, columnId, setTasks }: Props) => {
         onDrop={handleDragEnd}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
-        className={`h-full w-full transition-colors ${active ? "bg-neutral-800/50" : "bg-neutral-800/0"}`}
+        className={`w-full transition-colors`}
       >
         {filteredTasks.map((task) => {
           return (

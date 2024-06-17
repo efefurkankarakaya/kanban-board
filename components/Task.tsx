@@ -2,9 +2,10 @@
 
 import { motion } from "framer-motion";
 import DropIndicator from "./DropIndicator";
-import { DragEvent, useCallback } from "react";
+import { DragEvent, MouseEvent, useCallback } from "react";
 import { ITaskModel } from "@/models/task";
 import { TaskColorClassName } from "@/common/color";
+import useTaskStore from "@/store/task.store";
 
 interface Props {
   data: ITaskModel;
@@ -12,9 +13,18 @@ interface Props {
 }
 
 const Task = ({ data, handleDragStart }: Props) => {
+  const updateTask = useTaskStore((state) => state.updateTask);
+
   const { _id, _columnId, title } = data;
 
   // console.log("Task: ", _id, _columnId);
+
+  const onClick = useCallback(
+    (e: MouseEvent<HTMLDivElement>) => {
+      updateTask(data);
+    },
+    [updateTask, data]
+  );
 
   const onDragStart = useCallback(
     (e: DragEvent<HTMLDivElement>) => {
@@ -34,6 +44,7 @@ const Task = ({ data, handleDragStart }: Props) => {
         layout
         layoutId={_id}
         draggable="true"
+        onClick={onClick}
         // @ts-ignore: Mismatched type in module declaration onDragStart(event: DragEvent<HTMLDivElement>, info: PanInfo) => void
         onDragStart={onDragStart}
         className={`cursor-grab p-4 ${

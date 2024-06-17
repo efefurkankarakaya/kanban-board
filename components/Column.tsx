@@ -2,6 +2,7 @@ import { DragEvent, useMemo, useState } from "react";
 import DropIndicator from "./DropIndicator";
 import { ITaskModel } from "@/models/task";
 import Task from "./Task";
+import CreateTask from "./CreateTask";
 
 type Indicator = {
   offset: number;
@@ -150,6 +151,10 @@ const Column = ({ title, headingColor, tasks, columnId, setTasks }: Props) => {
           columnId={columnId}
         />
       </div>
+      <CreateTask
+        columnId={columnId}
+        setTasks={setTasks}
+      />
     </div>
   );
 };

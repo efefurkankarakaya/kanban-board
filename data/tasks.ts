@@ -1,15 +1,5 @@
 import { ITaskModel } from "@/models/task";
 
-export enum TaskColor {
-  red = 'bg-task-red',
-  green = 'bg-task-green',
-  blue = 'bg-task-blue',
-  pink = 'bg-task-pink',
-  purple = 'bg-task-purple',
-  orange = 'bg-task-orange',
-  powder = 'bg-task-powder'
-}
-
 export const data: ITaskModel[] = [
   {
     _id: "1",

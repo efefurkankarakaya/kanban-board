@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import DropIndicator from "./DropIndicator";
 import { DragEvent, useCallback } from "react";
 import { ITaskModel } from "@/models/task";
-import { TaskColor } from "@/data/tasks";
+import { TaskColorClassName } from "@/common/color";
 
 interface Props {
   data: ITaskModel;
@@ -36,7 +36,9 @@ const Task = ({ data, handleDragStart }: Props) => {
         draggable="true"
         // @ts-ignore: Mismatched type in module declaration onDragStart(event: DragEvent<HTMLDivElement>, info: PanInfo) => void
         onDragStart={onDragStart}
-        className={`cursor-grab p-4 ${data.color ? TaskColor[data.color] : TaskColor["blue"]} mb-3 rounded-md active:cursor-grabbing`}
+        className={`cursor-grab p-4 ${
+          data.color ? TaskColorClassName[data.color] : TaskColorClassName["blue"]
+        } mb-3 rounded-md active:cursor-grabbing`}
       >
         <h4 className="text-xs mb-1">{title}</h4>
         <p className="text-xxs font-thin">{data.description}</p>

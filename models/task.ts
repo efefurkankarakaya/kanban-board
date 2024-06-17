@@ -1,9 +1,11 @@
+import { TaskColor } from "@/common/color";
+
 export interface ITaskModel {
   _id: string;
   _columnId: string;
   title: string;
   description: string;
-  color: string;
+  color: TaskColor;
   priority: string;
   tags: string[];
 }
@@ -13,7 +15,7 @@ export class TaskModel implements ITaskModel {
   title: string;
   _columnId: string;
   description: string;
-  color: string;
+  color: TaskColor;
   priority: string;
   tags: string[];
 

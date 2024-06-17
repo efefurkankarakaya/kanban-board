@@ -1,5 +1,5 @@
 import type { Config } from "tailwindcss";
-import { TaskColor } from "./data/tasks";
+import { TaskColorClassName } from "./common/color";
 
 const config: Config = {
   content: ["./pages/**/*.{js,ts,jsx,tsx,mdx}", "./components/**/*.{js,ts,jsx,tsx,mdx}", "./app/**/*.{js,ts,jsx,tsx,mdx}"],
@@ -24,7 +24,7 @@ const config: Config = {
       }
     }
   },
-  safelist: Object.values(TaskColor).map((item) => item), // To be able to use dynamic Task colors in Task component
+  safelist: Object.values(TaskColorClassName).map((item) => item), // To be able to use dynamic Task colors in Task component
   plugins: []
 };
 export default config;

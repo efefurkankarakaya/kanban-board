@@ -26,3 +26,9 @@ body {
     text-wrap: balance;
   }
 }
+
+/* 
+::-webkit-resizer {
+  display: none;
+}
+*/

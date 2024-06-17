@@ -11,7 +11,7 @@ const SidePanelHeader = ({}: Props) => {
   };
 
   return (
-    <div className="w-full p-2">
+    <div className="w-full">
       <MdKeyboardDoubleArrowRight
         onClick={onClickRightArrow}
         className="text-neutral-500 cursor-pointer"

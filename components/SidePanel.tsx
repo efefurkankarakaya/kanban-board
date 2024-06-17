@@ -26,8 +26,8 @@ const SidePanel = (props: Props) => {
       type="right"
       isOpen={!!activeTask._id}
       size={30}
-      panelClassName="bg-task-list/50 h-full"
-      panelContainerClassName="bg-task-list/50 z-50"
+      panelClassName="bg-task-list h-full"
+      // panelContainerClassName="z-50"
     >
       <div
         className="h-full"

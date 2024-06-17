@@ -18,26 +18,26 @@ const client = new MongoClient(uri, {
   }
 });
 
-async function run() {
-  try {
-    // Connect the client to the server (optional starting in v4.7)
-    await client.connect();
-    // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
-  } finally {
-    // Ensures that the client will close when you finish/error
-    await client.close();
-  }
-}
+// async function run() {
+//   try {
+//     // Connect the client to the server (optional starting in v4.7)
+//     await client.connect();
+//     // Send a ping to confirm a successful connection
+//     await client.db("admin").command({ ping: 1 });
+//     console.log("Pinged your deployment. You successfully connected to MongoDB!");
+//   } finally {
+//     // Ensures that the client will close when you finish/error
+//     await client.close();
+//   }
+// }
 
-run()
-  .then(() => {
-    console.log("Kanban Board is connected to MongoDB");
-  })
-  .catch((error) => {
-    console.log("Error in MongoDB Connection:", error);
-  });
+// run()
+//   .then(() => {
+//     console.log("Kanban Board is connected to MongoDB");
+//   })
+//   .catch((error) => {
+//     console.log("Error in MongoDB Connection:", error);
+//   });
 
 // https://www.mongodb.com/docs/drivers/node/current/fundamentals/connection/connect/
 // https://nextjs.org/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating

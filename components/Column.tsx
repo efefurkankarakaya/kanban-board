@@ -60,13 +60,12 @@ const getNearestIndicator = (e: DragEvent<HTMLDivElement>, indicators: HTMLDivEl
 
 interface Props {
   title: string;
-  headingColor: string;
   columnId: string;
   tasks: ITaskModel[];
   setTasks: React.Dispatch<React.SetStateAction<ITaskModel[]>>;
 }
 
-const Column = ({ title, headingColor, tasks, columnId, setTasks }: Props) => {
+const Column = ({ title, tasks, columnId, setTasks }: Props) => {
   const [active, setActive] = useState(false);
 
   const handleDragStart = (e: DragEvent<HTMLDivElement>, task: ITaskModel) => {
@@ -128,7 +127,7 @@ const Column = ({ title, headingColor, tasks, columnId, setTasks }: Props) => {
   return (
     <div className={`w-56 shrink-0 h-fit p-4 rounded-lg ${active ? "bg-task-list" : "bg-task-list/50"}`}>
       <div className="mb-3 flex items-center justify-between">
-        <h3 className={`font-medium ${headingColor}`}>{title}</h3>
+        <h3 className={`font-medium text-neutral-200`}>{title}</h3>
         <span className="rounded text-sm text-neutral-400">{filteredTasks.length}</span>
       </div>
       <div

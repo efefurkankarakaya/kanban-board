@@ -16,7 +16,10 @@ const initialState: ITaskModel = {
   description: "",
   color: "blue",
   priority: "",
-  tags: []
+  tags: [],
+  createdAt: new Date(),
+  editedAt: new Date(),
+  completedAt: new Date()
 };
 
 const useTaskStore = create<TaskStore>((set) => ({

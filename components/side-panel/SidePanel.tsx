@@ -11,11 +11,13 @@ import { HiOutlineClipboardDocument } from "react-icons/hi2";
 import { WiTime9 } from "react-icons/wi";
 import RowTitle from "./RowTitle";
 import { FaRegCalendarAlt } from "react-icons/fa";
+import useDimensions from "@/hooks/useDimensions";
 
 interface Props {}
 
 const SidePanel = (props: Props) => {
   const ref = useRef(null);
+  const { width } = useDimensions();
   const [activeTask, updateTask, resetTask] = useTaskStore((state) => [state.task, state.updateTask, state.resetTask]);
 
   useClickAway(ref, () => {
@@ -26,11 +28,15 @@ const SidePanel = (props: Props) => {
     updateTask({ title: e.target.value });
   };
 
+  const onChangeDescription = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    updateTask({ description: e.target.value });
+  };
+
   return (
     <SlidingPanel
       type="right"
       isOpen={!!activeTask._id}
-      size={30}
+      size={width > 768 ? 30 : 100}
       panelClassName="bg-task-list h-full"
       panelContainerClassName="z-50 h-full"
     >
@@ -104,6 +110,18 @@ const SidePanel = (props: Props) => {
           </table>
           {/* <div className="flex flex-col-reverse divide-y divide-y-reverse"></div> */}
           <hr className="border-neutral-600/30 mt-10" />
+          <div className="mt-5 h-full">
+            <textarea
+              className="border-none outline-none resize-none bg-transparent placeholder:text-neutral-500/50 text-sm text-neutral-300 w-full h-full"
+              placeholder="Write something about the task"
+              value={activeTask.description}
+              onChange={onChangeDescription}
+              onInput={(e) => {
+                e.currentTarget.style.height = "";
+                e.currentTarget.style.height = e.currentTarget.scrollHeight + "px";
+              }}
+            />
+          </div>
         </div>
       </div>
     </SlidingPanel>

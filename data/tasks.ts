@@ -8,7 +8,9 @@ export const data: ITaskModel[] = [
     description: "Buy ingredients for breakfast.",
     color: "green",
     priority: "",
-    tags: []
+    tags: [],
+    createdAt: new Date(),
+    editedAt: new Date()
   },
   {
     _id: "2",
@@ -17,7 +19,9 @@ export const data: ITaskModel[] = [
     description: "Buy ingredients for breakfast.",
     color: "blue",
     priority: "",
-    tags: []
+    tags: [],
+    createdAt: new Date(),
+    editedAt: new Date()
   },
   {
     _id: "3",
@@ -26,7 +30,9 @@ export const data: ITaskModel[] = [
     description: "Buy ingredients for breakfast.",
     color: "pink",
     priority: "",
-    tags: []
+    tags: [],
+    createdAt: new Date(),
+    editedAt: new Date()
   },
   {
     _id: "4",
@@ -35,7 +41,9 @@ export const data: ITaskModel[] = [
     description: "Buy ingredients for breakfast.",
     color: "purple",
     priority: "",
-    tags: []
+    tags: [],
+    createdAt: new Date(),
+    editedAt: new Date()
   },
   {
     _id: "5",
@@ -44,7 +52,9 @@ export const data: ITaskModel[] = [
     description: "Buy ingredients for breakfast.",
     color: "red",
     priority: "",
-    tags: []
+    tags: [],
+    createdAt: new Date(),
+    editedAt: new Date()
   },
   {
     _id: "6",
@@ -53,7 +63,9 @@ export const data: ITaskModel[] = [
     description: "Buy ingredients for breakfast.",
     color: "orange",
     priority: "",
-    tags: []
+    tags: [],
+    createdAt: new Date(),
+    editedAt: new Date()
   },
   {
     _id: "7",
@@ -62,7 +74,9 @@ export const data: ITaskModel[] = [
     description: "Buy ingredients for breakfast.",
     color: "powder",
     priority: "",
-    tags: []
+    tags: [],
+    createdAt: new Date(),
+    editedAt: new Date()
   },
   {
     _id: "8",
@@ -71,7 +85,9 @@ export const data: ITaskModel[] = [
     description: "Buy ingredients for breakfast.",
     color: "green",
     priority: "",
-    tags: []
+    tags: [],
+    createdAt: new Date(),
+    editedAt: new Date()
   },
   {
     _id: "9",
@@ -80,7 +96,9 @@ export const data: ITaskModel[] = [
     description: "Buy ingredients for breakfast.",
     color: "powder",
     priority: "",
-    tags: []
+    tags: [],
+    createdAt: new Date(),
+    editedAt: new Date()
   },
   {
     _id: "10",
@@ -89,6 +107,8 @@ export const data: ITaskModel[] = [
     description: "Buy ingredients for breakfast.",
     color: "blue",
     priority: "",
-    tags: []
+    tags: [],
+    createdAt: new Date(),
+    editedAt: new Date()
   }
 ];

@@ -52,7 +52,7 @@ const Task = ({ data, handleDragStart }: Props) => {
         } mb-3 rounded-md active:cursor-grabbing`}
       >
         <h4 className="text-xs mb-1">{title}</h4>
-        <p className="text-xxs font-thin">{data.description}</p>
+        <p className="text-xxs font-thin truncate">{data.description}</p>
       </motion.div>
     </>
   );

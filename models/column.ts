@@ -1,4 +1,4 @@
-import { ITaskModel } from "./task";
+import { ITaskModel } from "./task.model";
 
 export interface IColumnModel {
   _id: string;

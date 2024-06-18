@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import DropIndicator from "./DropIndicator";
 import { DragEvent, MouseEvent, useCallback } from "react";
-import { ITaskModel } from "@/models/task";
+import { ITaskModel } from "@/models/task.model";
 import { TaskColorClassName } from "@/common/color";
 import useTaskStore from "@/store/task.store";
 

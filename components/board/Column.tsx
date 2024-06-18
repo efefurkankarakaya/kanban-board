@@ -1,6 +1,6 @@
 import { DragEvent, useMemo, useState } from "react";
 import DropIndicator from "./DropIndicator";
-import { ITaskModel } from "@/models/task";
+import { ITaskModel } from "@/models/task.model";
 import Task from "./Task";
 import CreateTask from "./CreateTask";
 import useTaskStore from "@/store/task.store";

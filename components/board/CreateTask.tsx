@@ -4,7 +4,7 @@ import { ChangeEvent, FormEvent, KeyboardEvent, LegacyRef, useRef, useState } fr
 import { motion } from "framer-motion";
 import { useClickAway } from "react-use";
 import { FiPlus } from "react-icons/fi";
-import { ITaskModel } from "@/models/task";
+import { ITaskModel } from "@/models/task.model";
 
 interface Props {
   columnId: string;

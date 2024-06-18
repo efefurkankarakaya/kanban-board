@@ -1,4 +1,4 @@
-import { ITaskModel } from "@/models/task";
+import { ITaskModel } from "@/models/task.model";
 import { create } from "zustand";
 
 interface TaskStore {

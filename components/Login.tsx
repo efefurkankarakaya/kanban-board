@@ -58,7 +58,8 @@ const Login = (props: Props) => {
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="bg-transparent border-2 rounded-lg p-3 outline-neutral-400 outline w-full font-thin text-7xl"
+            placeholder="Please enter a name"
+            className="bg-transparent border-b-2 p-3 outline-none w-full font-thin text-7xl"
             required
           />
         ) : (

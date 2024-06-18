@@ -10,22 +10,25 @@ type SignInResponse = {
 
 export async function POST(request: Request) {
   let response: SignInResponse = {} as SignInResponse;
+  const client = new MongoClient(databaseURI);
 
   try {
     const data: SignInFormData = await request.json();
 
-    const client = MongoClient.connect(databaseURI);
+    await client.connect();
     const db = (await client).db(databaseName);
     const usersCollection = db.collection("users");
 
-    const user = (await usersCollection.findOne({ userName: data.userName })) || {};
+    const user = await usersCollection.findOne({ userName: data.userName });
 
     if (user) {
-      const update: Partial<IUserModel> = {
+      console.log("User found: ", user);
+
+      const updated: Partial<IUserModel> = {
         lastLogin: new Date()
       };
 
-      await usersCollection.updateOne({ userName: data.userName }, { $set: update });
+      await usersCollection.updateOne({ userName: data.userName }, { $set: updated });
     } else {
       const newUser: UserCreationData = {
         userName: data.userName,
@@ -38,10 +41,14 @@ export async function POST(request: Request) {
       if (result.acknowledged) {
         response = { userName: newUser.userName, lastLogin: newUser.lastLogin };
       }
+
+      console.log("User created: ", newUser.userName);
     }
   } catch (error) {
     console.log(error);
   }
+
+  await client.close();
 
   return Response.json(response);
 }

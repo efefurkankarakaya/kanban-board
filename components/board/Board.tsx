@@ -5,9 +5,15 @@ import Column from "./Column";
 import { data } from "@/data/tasks";
 import Link from "next/link";
 import SidePanel from "../side-panel/SidePanel";
+import useTaskStore from "@/store/task.store";
+import { useMount } from "react-use";
 
 const Board = () => {
-  const [tasks, setTasks] = useState(data);
+  const updateTasks = useTaskStore((state) => state.updateTasks);
+
+  useMount(() => {
+    updateTasks(data);
+  });
 
   return (
     <div className="flex h-full w-full overflow-scroll">
@@ -29,26 +35,18 @@ const Board = () => {
           <Column
             title="Backlog"
             columnId="backlog"
-            tasks={tasks}
-            setTasks={setTasks}
           />
           <Column
             title="To do"
             columnId="todo"
-            tasks={tasks}
-            setTasks={setTasks}
           />
           <Column
             title="In progress"
             columnId="in-progress"
-            tasks={tasks}
-            setTasks={setTasks}
           />
           <Column
             title="Done"
             columnId="done"
-            tasks={tasks}
-            setTasks={setTasks}
           />
         </div>
       </div>

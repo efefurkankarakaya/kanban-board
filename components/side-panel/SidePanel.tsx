@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import SlidingPanel from "react-sliding-side-panel";
 import "react-sliding-side-panel/lib/index.css";
 import useTaskStore from "@/store/task.store";
@@ -11,16 +11,14 @@ interface Props {}
 
 const SidePanel = (props: Props) => {
   const ref = useRef(null);
-  const [activeTask, resetTask] = useTaskStore((state) => [state.task, state.resetTask]);
-
-  const [detail, setDetail] = useState(activeTask);
+  const [activeTask, updateTask, resetTask] = useTaskStore((state) => [state.task, state.updateTask, state.resetTask]);
 
   useClickAway(ref, () => {
     resetTask();
   });
 
   const onChangeTitle = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setDetail({ ...detail, title: e.target.value });
+    updateTask({ title: e.target.value });
   };
 
   return (
@@ -47,7 +45,7 @@ const SidePanel = (props: Props) => {
           <textarea
             className="border-none outline-none resize-none bg-transparent placeholder:text-neutral-500/50 text-neutral-300 text-4xl font-semibold"
             placeholder="Untitled"
-            value={detail.title}
+            value={activeTask.title}
             onChange={onChangeTitle}
             onInput={(e) => {
               e.currentTarget.style.height = "";

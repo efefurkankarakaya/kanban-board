@@ -3,6 +3,7 @@ import DropIndicator from "./DropIndicator";
 import { ITaskModel } from "@/models/task";
 import Task from "./Task";
 import CreateTask from "./CreateTask";
+import useTaskStore from "@/store/task.store";
 
 type Indicator = {
   offset: number;
@@ -61,12 +62,11 @@ const getNearestIndicator = (e: DragEvent<HTMLDivElement>, indicators: HTMLDivEl
 interface Props {
   title: string;
   columnId: string;
-  tasks: ITaskModel[];
-  setTasks: React.Dispatch<React.SetStateAction<ITaskModel[]>>;
 }
 
-const Column = ({ title, tasks, columnId, setTasks }: Props) => {
+const Column = ({ title, columnId }: Props) => {
   const [active, setActive] = useState(false);
+  const [tasks, updateTasks] = useTaskStore((state) => [state.tasks, state.updateTasks]);
 
   const handleDragStart = (e: DragEvent<HTMLDivElement>, task: ITaskModel) => {
     e.dataTransfer.setData("taskId", task._id);
@@ -106,7 +106,7 @@ const Column = ({ title, tasks, columnId, setTasks }: Props) => {
         copy.splice(insertAtIndex, 0, transfer);
       }
 
-      setTasks(copy);
+      updateTasks(copy);
     }
   };
 
@@ -152,7 +152,7 @@ const Column = ({ title, tasks, columnId, setTasks }: Props) => {
       </div>
       <CreateTask
         columnId={columnId}
-        setTasks={setTasks}
+        setTasks={updateTasks}
       />
     </div>
   );

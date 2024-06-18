@@ -3,13 +3,14 @@ import { IUserModel, UserCreationData } from "@/models/user.model";
 import { databaseName, databaseURI } from "@/persistence/database";
 import { MongoClient, WithId } from "mongodb";
 
-type SignInResponse = {
+export type SignInResponse = {
   userName: string;
   lastLogin: Date;
 };
 
 export async function POST(request: Request) {
   let response: SignInResponse = {} as SignInResponse;
+
   const client = new MongoClient(databaseURI);
 
   try {
@@ -27,6 +28,8 @@ export async function POST(request: Request) {
       const updated: Partial<IUserModel> = {
         lastLogin: new Date()
       };
+
+      response = { userName: user.userName, lastLogin: updated.lastLogin } as SignInResponse;
 
       await usersCollection.updateOne({ userName: data.userName }, { $set: updated });
     } else {

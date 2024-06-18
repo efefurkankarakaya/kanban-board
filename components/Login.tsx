@@ -1,6 +1,7 @@
 "use client";
 
 import { SignInFormData } from "@/dto/user/auth.dto";
+import { sendSignInRequest } from "@/services/user/auth";
 import { motion } from "framer-motion";
 import { FormEvent, useState } from "react";
 import TypeWriter, { TypewriterClass } from "typewriter-effect";
@@ -18,13 +19,9 @@ const Login = (props: Props) => {
 
     const data: SignInFormData = { userName };
 
-    await fetch("/api/account/sign-in", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json"
-      },
-      body: JSON.stringify(data)
-    });
+    const response = await sendSignInRequest(data);
+    const responseData = await response.json();
+    console.log("Response: ", responseData);
   };
 
   const onTypeWriterInit = (typewriter: TypewriterClass) => {

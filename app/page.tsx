@@ -1,8 +1,9 @@
 // import Board from "@/components/Board";
+import Login from "@/components/Login";
 import Kanban from "@/components/board/Kanban";
 import { MongoClient, ServerApiVersion } from "mongodb";
 
-const uri = process.env["DATABASE_URI"] as string;
+// const uri = process.env["DATABASE_URI"] as string;
 
 // async function connect() {
 //   const client = MongoClient.connect(uri);
@@ -10,13 +11,13 @@ const uri = process.env["DATABASE_URI"] as string;
 //   const collection = db.collection("");
 // }
 
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true
-  }
-});
+// const client = new MongoClient(uri, {
+//   serverApi: {
+//     version: ServerApiVersion.v1,
+//     strict: true,
+//     deprecationErrors: true
+//   }
+// });
 
 // async function run() {
 //   try {
@@ -45,14 +46,7 @@ const client = new MongoClient(uri, {
 export default function Home() {
   return (
     <main>
-      {/* <Board
-        boardData={{
-          "_id": "1",
-          "_userName": "efk",
-          "title": "Roadmap"
-        }}
-      /> */}
-      <Kanban />
+      <Login />
     </main>
   );
 }

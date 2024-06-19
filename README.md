@@ -32,3 +32,53 @@ A Notion-like full-stack Kanban Board application built on Next.js, Zustand and 
 
 - Build the app: `$ pnpm build`
 - Start the build: `$ pnpm start`
+
+### Folder Structure
+
+#### /app
+
+The main app folder, contains `pages` and `endpoints`.
+
+#### /calls
+
+This folder contains the service files (aka: API calls) of front-end.
+
+#### /common
+
+Contains common files and types.
+
+#### /components
+
+Contains client-side components.
+
+#### /data
+
+Contains initial/mock data.
+
+#### /hooks
+
+Contains custom hooks.
+
+#### /models
+
+Contains data models and interfaces.
+
+#### /persistence
+
+Contains database-related objects.
+
+#### /public
+
+Contains public files.
+
+#### /services
+
+Contains the back-end service files for API.
+
+#### /store
+
+Contains store files which are built on Zustand.
+
+#### .husky/
+
+Contains pre-commit hook to lint before commit.

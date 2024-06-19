@@ -24,6 +24,7 @@ const config: Config = {
       }
     }
   },
+  // https://stackoverflow.com/questions/73660771/tailwind-safelist-patterns-for-multiple-patterns
   safelist: Object.values(TaskColorClassName).map((item) => item), // To be able to use dynamic Task colors in Task component
   plugins: []
 };

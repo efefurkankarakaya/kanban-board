@@ -34,7 +34,7 @@ const SidePanel = (props: Props) => {
     <SlidingPanel
       type="right"
       isOpen={!!activeTask._id}
-      size={width > 768 ? 30 : 100}
+      size={width > 1366 ? 35 : width > 768 ? 50 : 100}
       panelClassName="bg-task-list h-full"
       panelContainerClassName="z-50 h-full"
     >
@@ -54,7 +54,10 @@ const SidePanel = (props: Props) => {
               e.currentTarget.style.height = e.currentTarget.scrollHeight + "px";
             }}
           />
-          <DetailTable activeTask={activeTask} />
+          <DetailTable
+            activeTask={activeTask}
+            updateTask={updateTask}
+          />
           {/* <div className="flex flex-col-reverse divide-y divide-y-reverse"></div> */}
           <hr className="border-neutral-600/30 mt-10" />
           <div className="mt-5 h-full">

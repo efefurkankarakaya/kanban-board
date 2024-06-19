@@ -1,3 +1,5 @@
+"use client";
+
 import { FiLoader } from "react-icons/fi";
 import RowTitle from "./RowTitle";
 import { HiOutlineClipboardDocument } from "react-icons/hi2";
@@ -5,12 +7,23 @@ import { WiTime9 } from "react-icons/wi";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { ITaskModel } from "@/models/task.model";
 import CopyButton from "./CopyButton";
+import { IoColorPaletteOutline } from "react-icons/io5";
+import { TaskColor, TaskColorClassName } from "@/common/color";
+import { MouseEvent } from "react";
+import sendUpdateTaskRequest from "@/calls/board/update-task";
 
 interface Props {
   activeTask: ITaskModel;
+  updateTask: (data: Partial<ITaskModel>) => void;
 }
 
-const DetailTable = ({ activeTask }: Props) => {
+const DetailTable = ({ activeTask, updateTask }: Props) => {
+  const onClickColor = async (e: MouseEvent<HTMLButtonElement>, color: TaskColor) => {
+    const data = { color };
+    updateTask(data);
+    await sendUpdateTaskRequest(activeTask._id, data);
+  };
+
   return (
     <table className="table-auto">
       <tbody className="[&>tr>td]:p-2">
@@ -59,6 +72,33 @@ const DetailTable = ({ activeTask }: Props) => {
             />
           </td>
           <td className="text-sm">{activeTask.completedAt ? new Date(activeTask.completedAt).toDateString() : ""}</td>
+          <td className="text-neutral-400">
+            <CopyButton text={activeTask.completedAt ? new Date(activeTask.completedAt).toDateString() : ""} />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <RowTitle
+              title="Color"
+              icon={IoColorPaletteOutline}
+            />
+          </td>
+          <td className="text-sm">
+            <div>
+              {Object.keys(TaskColorClassName).map((color, index) => {
+                return (
+                  <button
+                    onClick={(e) => onClickColor(e, color as TaskColor)}
+                    title={color.charAt(0).toUpperCase() + color.slice(1)}
+                    key={index}
+                    className={`${TaskColorClassName[color as TaskColor]} p-3 rounded-md mr-1 ${
+                      activeTask.color === color ? "border-neutral-200 border-2" : ""
+                    }`}
+                  ></button>
+                );
+              })}
+            </div>
+          </td>
           <td className="text-neutral-400">
             <CopyButton text={activeTask.completedAt ? new Date(activeTask.completedAt).toDateString() : ""} />
           </td>

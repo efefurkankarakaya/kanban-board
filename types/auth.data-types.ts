@@ -5,3 +5,8 @@ export interface SignInFormData {
 export interface SignUpFormData {
   userName: string;
 }
+
+export type SignInResponse = {
+  userName: string;
+  lastLogin: Date;
+};

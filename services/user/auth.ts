@@ -1,4 +1,4 @@
-import { SignInFormData } from "@/dto/user/auth.dto";
+import { SignInFormData } from "@/types/auth.data-types";
 
 const URLPrefix = "/api/account";
 

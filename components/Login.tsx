@@ -1,14 +1,16 @@
 "use client";
 
-import { SignInFormData } from "@/dto/user/auth.dto";
+import { SignInFormData, SignInResponse } from "@/types/auth.data-types";
 import { sendSignInRequest } from "@/services/user/auth";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import TypeWriter, { TypewriterClass } from "typewriter-effect";
 
 interface Props {}
 
 const Login = (props: Props) => {
+  const router = useRouter();
   const [isTyped, setIsTyped] = useState(true);
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -20,8 +22,10 @@ const Login = (props: Props) => {
     const data: SignInFormData = { userName };
 
     const response = await sendSignInRequest(data);
-    const responseData = await response.json();
+    const responseData: SignInResponse = await response.json();
     console.log("Response: ", responseData);
+
+    router.push(`/board/${responseData.userName}`);
   };
 
   const onTypeWriterInit = (typewriter: TypewriterClass) => {

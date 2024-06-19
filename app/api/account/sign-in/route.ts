@@ -1,12 +1,7 @@
-import { SignInFormData } from "@/dto/user/auth.dto";
+import { SignInFormData, SignInResponse } from "@/types/auth.data-types";
 import { IUserModel, UserCreationData } from "@/models/user.model";
 import { databaseName, databaseURI } from "@/persistence/database";
 import { MongoClient, WithId } from "mongodb";
-
-export type SignInResponse = {
-  userName: string;
-  lastLogin: Date;
-};
 
 export async function POST(request: Request) {
   let response: SignInResponse = {} as SignInResponse;

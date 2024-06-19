@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Kanban Board
 
-## Getting Started
+A Notion-like full-stack Kanban Board application built on Next.js, Zustand and MongoDB.
 
-First, run the development server:
+### Installation
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+#### Initial Steps
+
+- Create a environment file named `.env` in the root folder (`/`) of the project.
+- Copy below data and paste inside of `.env` file:
+
+```
+    DATABASE_NAME="kanban-board"
+    DATABASE_URI="mongodb://root:toor@localhost:27017/"
+    DATABASE_USER="root"
+    DATABASE_PASSWORD="toor"
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### Running the database (MongoDB instance)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Clone the repository: `$ git clone https://github.com/efefurkankarakaya/kanban-board`
+- Start the MongoDB instance in your local: `$ docker compose up`
+- Then the local MongoDB instance will be available at `http://localhost:27017`.
+- Also, MongoDB Express (admin panel) will be available at `http://localhost:8081`. But, I'd recommend you to use <a href="https://www.mongodb.com/products/tools/compass">MongoDB Compass</a> to access the MongoDB server.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+#### Running the app
 
-## Learn More
+- Install the packages: `$ pnpm i`
+- Start the development server: `$ pnpm dev`
 
-To learn more about Next.js, take a look at the following resources:
+### Build
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Build the app: `$ pnpm build`
+- Start the build: `$ pnpm start`

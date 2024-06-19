@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
 import Column from "./Column";
 import { data } from "@/data/tasks";
@@ -11,16 +11,19 @@ import sendGetBoardRequest from "@/calls/board/get-board";
 import { IBoardModel } from "@/models/board.model";
 import { IColumnModel } from "@/models/column.model";
 import sendGetColumnsRequest from "@/calls/board/get-columns";
+import sendGetTasksRequest from "@/calls/board/get-tasks";
 
 const Board = () => {
   const pathname = usePathname();
-  const [board, setBoard] = useState<IBoardModel>({});
+  const [board, setBoard] = useState<IBoardModel>({} as IBoardModel);
   const [columns, setColumns] = useState<IColumnModel[]>([]);
+  // const columns = useMemo(() => {}) // TODO: Refactor
   const updateTasks = useTaskStore((state) => state.updateTasks);
 
+  // TODO: Refactor
   useEffect(() => {
-    updateTasks(data);
     const userName = pathname.split("board/")[1];
+
     sendGetBoardRequest(userName)
       .then((response) => response.json())
       .then((data) => setBoard(data))
@@ -30,6 +33,12 @@ const Board = () => {
       .then((response) => response.json())
       .then((data) => setColumns(data))
       .catch((error) => console.log(error));
+
+    // updateTasks(data);
+    sendGetTasksRequest(board._id)
+      .then((response) => response.json())
+      .then((data) => updateTasks(data))
+      .catch((error) => console.error(error));
   }, [pathname, updateTasks, board._id]);
 
   return (
@@ -56,7 +65,7 @@ const Board = () => {
               columnId={column._id}
             />
           ))}
-          <Column
+          {/* <Column
             title="Backlog"
             columnId="backlog"
           />
@@ -71,7 +80,7 @@ const Board = () => {
           <Column
             title="Done"
             columnId="done"
-          />
+          /> */}
         </div>
       </div>
       <SidePanel />

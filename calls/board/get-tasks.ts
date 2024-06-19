@@ -1,5 +1,5 @@
-const sendGetColumnsRequest = async (boardId: string): Promise<Response> => {
-  const endpoint = "/api/board/columns";
+const sendGetTasksRequest = async (boardId: string): Promise<Response> => {
+  const endpoint = "/api/board/tasks";
   const data = { boardId };
   const body = JSON.stringify(data);
 
@@ -12,4 +12,4 @@ const sendGetColumnsRequest = async (boardId: string): Promise<Response> => {
   });
 };
 
-export default sendGetColumnsRequest;
+export default sendGetTasksRequest;

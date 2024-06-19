@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Column from "./Column";
 import Link from "next/link";
@@ -11,16 +11,20 @@ import { IBoardModel } from "@/models/board.model";
 import { IColumnModel } from "@/models/column.model";
 import sendGetColumnsRequest from "@/calls/board/get-columns";
 import sendGetTasksRequest from "@/calls/board/get-tasks";
+import { useClickAway } from "react-use";
+import sendUpdateBoardRequest from "@/calls/board/update-board";
 
 const Board = () => {
+  const ref = useRef(null);
+
   const pathname = usePathname();
+  const userName = pathname.split("board/")[1];
+
   const [board, setBoard] = useState<IBoardModel>({} as IBoardModel);
   const [columns, setColumns] = useState<IColumnModel[]>([]);
   const updateTasks = useTaskStore((state) => state.updateTasks);
 
   useEffect(() => {
-    const userName = pathname.split("board/")[1];
-
     sendGetBoardRequest(userName)
       .then((response) => response.json())
       .then((data) => setBoard(data))
@@ -35,13 +39,32 @@ const Board = () => {
       .then((response) => response.json())
       .then((data) => updateTasks(data))
       .catch((error) => console.error(error));
-  }, [pathname, updateTasks, board._id]);
+  }, [userName, updateTasks, board._id]);
+
+  const onChangeHeader = (e: ChangeEvent<HTMLInputElement>) => {
+    setBoard({ ...board, title: e.target.value });
+  };
+
+  useClickAway(ref, async () => {
+    await sendUpdateBoardRequest(userName, { title: board.title });
+  });
 
   return (
     <div className="flex h-full w-full overflow-scroll">
       <div className="flex flex-col p-12">
         <div className="mb-7 ml-5">
-          <h3 className="mb-1 font-semibold text-4xl">{board?.title}</h3>
+          <h3
+            ref={ref}
+            className="mb-1 font-semibold text-4xl outline-none"
+            // onKeyUp={onKeyUpHeader}
+          >
+            <input
+              className="outline-none border-none bg-transparent"
+              value={board?.title}
+              onChange={onChangeHeader}
+              placeholder="Untitled"
+            />
+          </h3>
           <div className="flex flex-row text-xs gap-1 ">
             <p className="text-neutral-300">By Isaac N.C.</p>
             <Link

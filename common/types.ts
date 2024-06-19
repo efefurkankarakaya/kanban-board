@@ -11,9 +11,12 @@ export type CustomAPIResponse<T> = {
   data: T | Record<never, never>;
 };
 
+export type UpdateBoardData = {
+  title: IBoardModel["title"];
+};
+
 export type RequestAllTasks = {
   boardId: IBoardModel["_id"];
-  // columnId: IColumnModel["_id"];
 };
 
 export type RequestColumnData = {

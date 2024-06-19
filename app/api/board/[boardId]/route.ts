@@ -7,6 +7,45 @@ type Params = {
   boardId: string;
 };
 
+export async function PATCH(request: Request, { params }: DynamicAPIArgument<Params>) {
+  // Each user has their own board, so basically user names are actually visible board ids
+  const { boardId: userName } = params;
+
+  const response: CustomAPIResponse<IBoardModel> = {
+    status: 500,
+    data: {} as IBoardModel
+  };
+
+  const client = new MongoClient(databaseURI);
+
+  try {
+    const data: Partial<IBoardModel> = await request.json();
+
+    await client.connect();
+    const db = client.db(databaseName);
+    const collection = db.collection<IBoardModel>("boards");
+
+    const board = await collection.findOneAndUpdate(
+      { userName },
+      {
+        $set: { ...data }
+      },
+      {
+        returnDocument: "after"
+      }
+    );
+
+    response.data = board || {};
+    response.status = 200;
+  } catch (error) {
+    console.log(error);
+  }
+
+  await client.close();
+
+  return Response.json(response.data, { status: response.status });
+}
+
 export async function GET(request: Request, { params }: DynamicAPIArgument<Params>) {
   // Each user has their own board, so basically user names are actually visible board ids
   const { boardId: userName } = params;

@@ -16,10 +16,14 @@ type CreateBoardResult = {
   acknowledged: boolean;
 } & IBoardModel;
 
-const createBoard = async (userData: UserData, collection: Collection<Document & IBoardModel>): Promise<CreateBoardResult> => {
+const createBoard = async (
+  title: string,
+  userData: UserData,
+  collection: Collection<Document & IBoardModel>
+): Promise<CreateBoardResult> => {
   const newBoard: BoardCreationData = {
     ...userData,
-    title: "Untitled"
+    title
   };
 
   const result = await collection.insertOne(newBoard as IBoardModel);

@@ -44,7 +44,7 @@ export async function POST(request: Request) {
       console.log("User created: ", result.userName);
 
       const userDataForBoard = { _userId: result._id, userName: result.userName };
-      const board = await createBoard(userDataForBoard, boardsCollection);
+      const board = await createBoard("Roadmap", userDataForBoard, boardsCollection);
 
       const backlog = await createColumn("Backlog", board._id, columnsCollection);
       const todo = await createColumn("To do", board._id, columnsCollection);

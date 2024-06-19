@@ -1,25 +1,34 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import Column from "./Column";
 import { data } from "@/data/tasks";
 import Link from "next/link";
 import SidePanel from "../side-panel/SidePanel";
 import useTaskStore from "@/store/task.store";
-import { useMount } from "react-use";
+import sendGetBoardRequest from "@/calls/board/get-board";
+import { IBoardModel } from "@/models/board.model";
 
 const Board = () => {
+  const pathname = usePathname();
+  const [board, setBoard] = useState<IBoardModel>();
   const updateTasks = useTaskStore((state) => state.updateTasks);
 
-  useMount(() => {
+  useEffect(() => {
     updateTasks(data);
-  });
+    const userName = pathname.split("board/")[1];
+    sendGetBoardRequest(userName)
+      .then((response) => response.json())
+      .then((data) => setBoard(data))
+      .catch((error) => console.error(error));
+  }, [pathname, updateTasks]);
 
   return (
     <div className="flex h-full w-full overflow-scroll">
       <div className="flex flex-col p-12">
         <div className="mb-7 ml-5">
-          <h3 className="mb-1 font-semibold text-4xl">Roadmap</h3>
+          <h3 className="mb-1 font-semibold text-4xl">{board?.title}</h3>
           <div className="flex flex-row text-xs gap-1 ">
             <p className="text-neutral-300">By Isaac N.C.</p>
             <Link

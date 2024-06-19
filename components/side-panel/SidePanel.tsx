@@ -34,7 +34,7 @@ const SidePanel = (props: Props) => {
     <SlidingPanel
       type="right"
       isOpen={!!activeTask._id}
-      size={width > 1366 ? 35 : width > 768 ? 50 : 100}
+      size={width > 1366 ? 30 : width > 768 ? 45 : 100}
       panelClassName="bg-task-list h-full"
       panelContainerClassName="z-50 h-full"
     >

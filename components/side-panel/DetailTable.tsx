@@ -2,7 +2,6 @@
 
 import { FiLoader } from "react-icons/fi";
 import RowTitle from "./RowTitle";
-import { HiOutlineClipboardDocument } from "react-icons/hi2";
 import { WiTime9 } from "react-icons/wi";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { ITaskModel } from "@/models/task.model";
@@ -11,6 +10,7 @@ import { IoColorPaletteOutline } from "react-icons/io5";
 import { TaskColor, TaskColorClassName } from "@/common/color";
 import { MouseEvent } from "react";
 import sendUpdateTaskRequest from "@/calls/board/update-task";
+import CustomDatePicker from "./CustomDatePicker";
 
 interface Props {
   activeTask: ITaskModel;
@@ -71,7 +71,13 @@ const DetailTable = ({ activeTask, updateTask }: Props) => {
               icon={FaRegCalendarAlt}
             />
           </td>
-          <td className="text-sm">{activeTask.completedAt ? new Date(activeTask.completedAt).toDateString() : ""}</td>
+          <td className="text-sm">
+            <CustomDatePicker
+              taskId={activeTask._id}
+              completedAt={activeTask.completedAt}
+              updateTask={updateTask}
+            />
+          </td>
           <td className="text-neutral-400">
             <CopyButton text={activeTask.completedAt ? new Date(activeTask.completedAt).toDateString() : ""} />
           </td>

@@ -12,16 +12,13 @@ export async function POST(request: Request) {
 
   const client = new MongoClient(databaseURI);
 
-  console.log("try");
   try {
-    // console.log(request.body);
     const data: RequestAllColumns = await request.json();
     console.log(data);
 
     await client.connect();
     const db = client.db(databaseName);
     const collection = db.collection<IColumnModel>("columns");
-    // console.log(collection);
 
     // @ts-ignore: 24-char hex presentation of id is only being used ObjectId here.
     const columns = await collection.find({ _boardId: new ObjectId(data.boardId) }).toArray();

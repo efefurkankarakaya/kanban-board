@@ -1,9 +1,15 @@
+import { IBoardModel } from "@/models/board.model";
 import { IColumnModel } from "@/models/column.model";
 import { IUserModel } from "@/models/user.model";
 
 export type CustomAPIResponse<T> = {
   status: number;
   data: T | Record<never, never>;
+};
+
+export type RequestAllTasks = {
+  boardId: IBoardModel["_id"];
+  // columnId: IColumnModel["_id"];
 };
 
 export type RequestColumnData = {

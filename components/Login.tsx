@@ -1,7 +1,7 @@
 "use client";
 
-import { SignInFormData, SignInResponse } from "@/types/auth.data-types";
-import { sendSignInRequest } from "@/services/user/auth";
+import { sendSignInRequest } from "@/calls/user/account";
+import { SignInFormData, SignInResponseData } from "@/types/auth.data-types";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
@@ -22,10 +22,15 @@ const Login = (props: Props) => {
     const data: SignInFormData = { userName };
 
     const response = await sendSignInRequest(data);
-    const responseData: SignInResponse = await response.json();
-    console.log("Response: ", responseData);
+    if (response.status === 200) {
+      const responseData: SignInResponseData = await response.json();
 
-    router.push(`/board/${responseData.userName}`);
+      if (responseData.userName) {
+        router.push(`/board/${responseData.userName}`);
+      }
+    } else {
+      console.log("Login failed.");
+    }
   };
 
   const onTypeWriterInit = (typewriter: TypewriterClass) => {

@@ -1,10 +1,20 @@
-import { SignInFormData, SignInResponse } from "@/types/auth.data-types";
+import { SignInFormData, SignInResponseData } from "@/types/auth.data-types";
 import { IUserModel, UserCreationData } from "@/models/user.model";
 import { databaseName, databaseURI } from "@/persistence/database";
 import { MongoClient, WithId } from "mongodb";
+import createUser from "@/services/account/create-user";
+import updateUser from "@/services/account/update-user";
+
+type SignInResponse = {
+  status: number;
+  data: SignInResponseData;
+};
 
 export async function POST(request: Request) {
-  let response: SignInResponse = {} as SignInResponse;
+  const response: SignInResponse = {
+    status: 500,
+    data: {} as SignInResponseData
+  };
 
   const client = new MongoClient(databaseURI);
 
@@ -12,35 +22,26 @@ export async function POST(request: Request) {
     const data: SignInFormData = await request.json();
 
     await client.connect();
-    const db = (await client).db(databaseName);
-    const usersCollection = db.collection("users");
+    const db = client.db(databaseName);
+    const usersCollection = db.collection<IUserModel>("users");
 
     const user = await usersCollection.findOne({ userName: data.userName });
 
+    let result;
+
     if (user) {
-      console.log("User found: ", user);
-
-      const updated: Partial<IUserModel> = {
-        lastLogin: new Date()
-      };
-
-      response = { userName: user.userName, lastLogin: updated.lastLogin } as SignInResponse;
-
-      await usersCollection.updateOne({ userName: data.userName }, { $set: updated });
+      result = await updateUser(data, usersCollection);
+      console.log("User updated: ", result.userName);
     } else {
-      const newUser: UserCreationData = {
-        userName: data.userName,
-        createdAt: new Date(),
-        lastLogin: new Date()
-      };
+      result = await createUser(data, usersCollection);
+      console.log("User created: ", result.userName);
+    }
 
-      const result = await usersCollection.insertOne(newUser);
+    const { userName, lastLogin, acknowledged } = result;
 
-      if (result.acknowledged) {
-        response = { userName: newUser.userName, lastLogin: newUser.lastLogin };
-      }
-
-      console.log("User created: ", newUser.userName);
+    if (acknowledged) {
+      response.data = { userName, lastLogin };
+      response.status = 200;
     }
   } catch (error) {
     console.log(error);
@@ -48,5 +49,7 @@ export async function POST(request: Request) {
 
   await client.close();
 
-  return Response.json(response);
+  return Response.json(response.data, {
+    status: response.status
+  });
 }

@@ -18,19 +18,20 @@ export async function PATCH(request: Request, { params }: DynamicAPIArgument<Par
   const client = new MongoClient(databaseURI);
 
   try {
-    const data: Partial<ITaskModel> = await request.json();
-    console.log(data);
+    const { _columnId, ...rest }: Partial<ITaskModel> = await request.json();
 
     await client.connect();
     const db = client.db(databaseName);
 
     const update: Partial<ITaskModel> = {
-      ...data,
+      // @ts-ignore: IDs should be set as ObjectId
+      _columnId: new ObjectId(_columnId),
+      ...rest,
       editedAt: new Date()
     };
 
     const task = await db.collection<ITaskModel>("tasks").findOneAndUpdate(
-      // @ts-ignore
+      // @ts-ignore: IDs should be used as ObjectId in CRUD
       { _id: new ObjectId(taskId) },
       {
         $set: update

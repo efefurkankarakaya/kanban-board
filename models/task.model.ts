@@ -9,6 +9,7 @@ export interface ITaskModel {
   color: TaskColor;
   priority: string;
   tags: string[];
+  order: number;
   completedAt?: Date;
   createdAt: Date;
   editedAt: Date;
@@ -22,6 +23,7 @@ export class TaskModel implements ITaskModel {
   color: TaskColor;
   priority: string;
   tags: string[];
+  order: number;
   completedAt?: Date;
   createdAt: Date;
   editedAt: Date;
@@ -34,6 +36,7 @@ export class TaskModel implements ITaskModel {
     this.color = task.color;
     this.priority = task.priority;
     this.tags = task.tags;
+    this.order = task.order;
     this.createdAt = task.createdAt;
     this.completedAt = task.completedAt;
     this.editedAt = task.editedAt;

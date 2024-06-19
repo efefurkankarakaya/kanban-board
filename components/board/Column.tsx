@@ -1,9 +1,11 @@
-import { DragEvent, useMemo, useState } from "react";
+import { DragEvent, useEffect, useMemo, useState } from "react";
 import DropIndicator from "./DropIndicator";
 import { ITaskModel } from "@/models/task.model";
 import Task from "./Task";
 import CreateTask from "./CreateTask";
 import useTaskStore from "@/store/task.store";
+import sendUpdateTaskRequest from "@/calls/board/update-task";
+import sendReorderTaskRequest from "@/calls/board/reorder-task";
 
 type Indicator = {
   offset: number;
@@ -72,7 +74,7 @@ const Column = ({ title, columnId }: Props) => {
     e.dataTransfer.setData("taskId", task._id);
   };
 
-  const handleDragEnd = (e: DragEvent<HTMLDivElement>) => {
+  const handleDragEnd = async (e: DragEvent<HTMLDivElement>) => {
     const taskId = e.dataTransfer.getData("taskId");
 
     setActive(false);
@@ -106,6 +108,8 @@ const Column = ({ title, columnId }: Props) => {
         copy.splice(insertAtIndex, 0, transfer);
       }
 
+      // await sendUpdateTaskRequest(transfer._id, { _columnId: columnId });
+      await sendReorderTaskRequest(copy);
       updateTasks(copy);
     }
   };

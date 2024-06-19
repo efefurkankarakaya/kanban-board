@@ -11,6 +11,7 @@ export const data: ITaskModel[] = [
     color: "pink",
     priority: "",
     tags: [],
+    order: 0,
     createdAt: new Date(),
     editedAt: new Date()
   },
@@ -22,6 +23,7 @@ export const data: ITaskModel[] = [
     color: "blue",
     priority: "",
     tags: [],
+    order: 1,
     createdAt: new Date(),
     editedAt: new Date()
   },
@@ -33,6 +35,7 @@ export const data: ITaskModel[] = [
     color: "red",
     priority: "",
     tags: [],
+    order: 1,
     createdAt: new Date(),
     editedAt: new Date()
   },
@@ -44,6 +47,7 @@ export const data: ITaskModel[] = [
     color: "red",
     priority: "",
     tags: [],
+    order: 2,
     createdAt: new Date(),
     editedAt: new Date()
   },
@@ -55,6 +59,7 @@ export const data: ITaskModel[] = [
     color: "purple",
     priority: "",
     tags: [],
+    order: 3,
     createdAt: new Date(),
     editedAt: new Date()
   },
@@ -66,6 +71,7 @@ export const data: ITaskModel[] = [
     color: "purple",
     priority: "",
     tags: [],
+    order: 4,
     createdAt: new Date(),
     editedAt: new Date()
   },
@@ -77,6 +83,7 @@ export const data: ITaskModel[] = [
     color: "powder",
     priority: "",
     tags: [],
+    order: 5,
     createdAt: new Date(),
     editedAt: new Date()
   },
@@ -88,6 +95,7 @@ export const data: ITaskModel[] = [
     color: "red",
     priority: "",
     tags: [],
+    order: 0,
     createdAt: new Date(),
     editedAt: new Date()
   },
@@ -99,6 +107,7 @@ export const data: ITaskModel[] = [
     color: "blue",
     priority: "",
     tags: [],
+    order: 1,
     createdAt: new Date(),
     editedAt: new Date()
   },
@@ -110,6 +119,7 @@ export const data: ITaskModel[] = [
     color: "blue",
     priority: "",
     tags: [],
+    order: 2,
     createdAt: new Date(),
     editedAt: new Date()
   },
@@ -121,6 +131,7 @@ export const data: ITaskModel[] = [
     color: "blue",
     priority: "",
     tags: [],
+    order: 3,
     createdAt: new Date(),
     editedAt: new Date()
   },
@@ -132,6 +143,7 @@ export const data: ITaskModel[] = [
     color: "green",
     priority: "",
     tags: [],
+    order: 0,
     createdAt: new Date(),
     editedAt: new Date()
   },
@@ -143,6 +155,7 @@ export const data: ITaskModel[] = [
     color: "green",
     priority: "",
     tags: [],
+    order: 1,
     createdAt: new Date(),
     editedAt: new Date()
   }

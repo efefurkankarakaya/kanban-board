@@ -29,10 +29,12 @@ export async function POST(request: Request) {
     const columnIds = columns.map((column) => new ObjectId(column._id));
 
     // Finding tasks that are existed in the same board with their columns.
-    const tasks = await db
-      .collection("tasks")
-      .find({ _columnId: { $in: columnIds } })
-      .toArray();
+    const tasks = (
+      await db
+        .collection("tasks")
+        .find({ _columnId: { $in: columnIds } }, { sort: { order: 1 } })
+        .toArray()
+    ).sort((a, b) => a.order - b.order);
 
     response.data = tasks || [];
     response.status = 200;

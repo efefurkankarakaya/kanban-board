@@ -20,6 +20,7 @@ const Board = () => {
   const pathname = usePathname();
   const userName = pathname.split("board/")[1];
 
+  const [isDirty, setIsDirty] = useState(false);
   const [board, setBoard] = useState<IBoardModel>({} as IBoardModel);
   const [columns, setColumns] = useState<IColumnModel[]>([]);
   const updateTasks = useTaskStore((state) => state.updateTasks);
@@ -43,10 +44,14 @@ const Board = () => {
 
   const onChangeHeader = (e: ChangeEvent<HTMLInputElement>) => {
     setBoard({ ...board, title: e.target.value });
+    setIsDirty(true);
   };
 
   useClickAway(ref, async () => {
-    await sendUpdateBoardRequest(userName, { title: board.title });
+    if (isDirty) {
+      await sendUpdateBoardRequest(userName, { title: board.title });
+    }
+    setIsDirty(false);
   });
 
   return (

@@ -1,8 +1,8 @@
 import { IUserModel, UserCreationData } from "@/models/user.model";
-import { SignUpFormData, SignUpResponse } from "@/types/auth.data-types";
+import { SignUpFormData } from "@/types/auth.data-types";
 import { Collection, Document } from "mongodb";
 
-type CreateUserResult = { acknowledged: boolean } & SignUpResponse;
+type CreateUserResult = { acknowledged: boolean } & IUserModel;
 
 const createUser = async (data: SignUpFormData, users: Collection<Document & IUserModel>): Promise<CreateUserResult> => {
   const newUser: UserCreationData = {
@@ -13,7 +13,11 @@ const createUser = async (data: SignUpFormData, users: Collection<Document & IUs
 
   const result = await users.insertOne(newUser as IUserModel);
 
-  const status: CreateUserResult = { userName: newUser.userName, lastLogin: newUser.lastLogin, acknowledged: result.acknowledged };
+  const status: CreateUserResult = {
+    _id: result.insertedId.toString(),
+    ...newUser,
+    acknowledged: result.acknowledged
+  };
 
   return status;
 };

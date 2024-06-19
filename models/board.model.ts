@@ -1,5 +1,6 @@
 export interface IBoardModel {
   _id: string;
-  _userName: string;
+  _userId: string;
+  userName: string;
   title: string;
 }

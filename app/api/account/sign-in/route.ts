@@ -4,6 +4,11 @@ import { databaseName, databaseURI } from "@/persistence/database";
 import { MongoClient, WithId } from "mongodb";
 import createUser from "@/services/account/create-user";
 import updateUser from "@/services/account/update-user";
+import { IBoardModel } from "@/models/board.model";
+import createBoard from "@/services/board/create-board";
+import { IColumnModel } from "@/models/column.model";
+import { ITaskModel } from "@/models/task.model";
+import createColumn from "@/services/board/create-column";
 
 type SignInResponse = {
   status: number;
@@ -23,7 +28,11 @@ export async function POST(request: Request) {
 
     await client.connect();
     const db = client.db(databaseName);
+
     const usersCollection = db.collection<IUserModel>("users");
+    const boardsCollection = db.collection<IBoardModel>("boards");
+    const columnsCollection = db.collection<IColumnModel>("columns");
+    const tasksCollection = db.collection<ITaskModel>("tasks");
 
     const user = await usersCollection.findOne({ userName: data.userName });
 
@@ -35,6 +44,14 @@ export async function POST(request: Request) {
     } else {
       result = await createUser(data, usersCollection);
       console.log("User created: ", result.userName);
+
+      const userDataForBoard = { _userId: result._id, userName: result.userName };
+      const board = await createBoard(userDataForBoard, boardsCollection);
+
+      const backlog = await createColumn("Backlog", board._id, columnsCollection);
+      const todo = await createColumn("To do", board._id, columnsCollection);
+      const inProgress = await createColumn("In progress", board._id, columnsCollection);
+      const done = await createColumn("Done", board._id, columnsCollection);
     }
 
     const { userName, lastLogin, acknowledged } = result;

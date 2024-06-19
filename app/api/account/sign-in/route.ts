@@ -1,4 +1,4 @@
-import { SignInFormData, SignInResponseData } from "@/common/types";
+import { CustomAPIResponse, SignInFormData, SignInResponseData } from "@/common/types";
 import { IUserModel, UserCreationData } from "@/models/user.model";
 import { databaseName, databaseURI } from "@/persistence/database";
 import { MongoClient, WithId } from "mongodb";
@@ -12,13 +12,9 @@ import createColumn from "@/services/board/create-column";
 import * as tasks from "@/data/tasks";
 import createTask from "@/services/board/create-task";
 
-type SignInResponse = {
-  status: number;
-  data: SignInResponseData;
-};
-
+// TODO: Refactor here.
 export async function POST(request: Request) {
-  const response: SignInResponse = {
+  const response: CustomAPIResponse<SignInResponseData> = {
     status: 500,
     data: {} as SignInResponseData
   };

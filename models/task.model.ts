@@ -1,8 +1,9 @@
 import { TaskColor } from "@/common/color";
+import { IColumnModel } from "./column.model";
 
 export interface ITaskModel {
   _id: string;
-  _columnId: string;
+  _columnId: IColumnModel["_id"];
   title: string;
   description: string;
   color: TaskColor;
@@ -15,8 +16,8 @@ export interface ITaskModel {
 
 export class TaskModel implements ITaskModel {
   _id: string;
+  _columnId: IColumnModel["_id"];
   title: string;
-  _columnId: string;
   description: string;
   color: TaskColor;
   priority: string;

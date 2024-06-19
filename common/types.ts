@@ -1,22 +1,33 @@
+import { IColumnModel } from "@/models/column.model";
+import { IUserModel } from "@/models/user.model";
+
 export type CustomAPIResponse<T> = {
   status: number;
   data: T | Record<never, never>;
 };
 
-export interface SignInFormData {
-  userName: string;
-}
+export type RequestColumnData = {
+  columnId: IColumnModel["_id"];
+};
 
-export interface SignUpFormData {
-  userName: string;
-}
+export type RequestAllColumns = {
+  boardId: IColumnModel["_boardId"];
+};
+
+export type SignInFormData = {
+  userName: IUserModel["userName"];
+};
+
+export type SignUpFormData = {
+  userName: IUserModel["userName"];
+};
 
 export type SignInResponseData = {
-  userName: string;
-  lastLogin: Date;
+  userName: IUserModel["userName"];
+  lastLogin: IUserModel["lastLogin"];
 };
 
 export type SignUpResponseData = {
-  userName: string;
-  lastLogin: Date;
+  userName: IUserModel["userName"];
+  lastLogin: IUserModel["lastLogin"];
 };

@@ -10,11 +10,12 @@ import useTaskStore from "@/store/task.store";
 import sendGetBoardRequest from "@/calls/board/get-board";
 import { IBoardModel } from "@/models/board.model";
 import { IColumnModel } from "@/models/column.model";
+import sendGetColumnsRequest from "@/calls/board/get-columns";
 
 const Board = () => {
   const pathname = usePathname();
-  const [board, setBoard] = useState<IBoardModel>();
-  const [column, setColumn] = useState<IColumnModel>();
+  const [board, setBoard] = useState<IBoardModel>({});
+  const [columns, setColumns] = useState<IColumnModel[]>([]);
   const updateTasks = useTaskStore((state) => state.updateTasks);
 
   useEffect(() => {
@@ -24,7 +25,12 @@ const Board = () => {
       .then((response) => response.json())
       .then((data) => setBoard(data))
       .catch((error) => console.error(error));
-  }, [pathname, updateTasks]);
+
+    sendGetColumnsRequest(board?._id)
+      .then((response) => response.json())
+      .then((data) => setColumns(data))
+      .catch((error) => console.log(error));
+  }, [pathname, updateTasks, board._id]);
 
   return (
     <div className="flex h-full w-full overflow-scroll">
@@ -43,6 +49,13 @@ const Board = () => {
           </div>
         </div>
         <div className="flex gap-3">
+          {columns.map((column) => (
+            <Column
+              key={column._id}
+              title={column.title}
+              columnId={column._id}
+            />
+          ))}
           <Column
             title="Backlog"
             columnId="backlog"

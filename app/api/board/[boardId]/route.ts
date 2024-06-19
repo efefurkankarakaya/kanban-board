@@ -1,11 +1,7 @@
+import { CustomAPIResponse } from "@/common/types";
 import { IBoardModel } from "@/models/board.model";
 import { databaseName, databaseURI } from "@/persistence/database";
 import { MongoClient } from "mongodb";
-
-type CustomResponse<T> = {
-  status: number;
-  data: T | Record<never, never>;
-};
 
 type Params = {
   boardId: string;
@@ -19,7 +15,7 @@ export async function GET(request: Request, { params }: Dynamic) {
   // Each user has their own board, so basically user names are actually visible board ids
   const { boardId: userName } = params;
 
-  const response: CustomResponse<IBoardModel> = {
+  const response: CustomAPIResponse<IBoardModel> = {
     status: 500,
     data: {} as IBoardModel
   };

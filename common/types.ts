@@ -1,3 +1,8 @@
+export type CustomAPIResponse<T> = {
+  status: number;
+  data: T | Record<never, never>;
+};
+
 export interface SignInFormData {
   userName: string;
 }

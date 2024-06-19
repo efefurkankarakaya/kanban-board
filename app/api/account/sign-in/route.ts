@@ -1,4 +1,4 @@
-import { SignInFormData, SignInResponseData } from "@/types/auth.data-types";
+import { SignInFormData, SignInResponseData } from "@/common/types";
 import { IUserModel, UserCreationData } from "@/models/user.model";
 import { databaseName, databaseURI } from "@/persistence/database";
 import { MongoClient, WithId } from "mongodb";

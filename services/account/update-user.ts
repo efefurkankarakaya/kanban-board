@@ -1,5 +1,5 @@
 import { IUserModel, UserCreationData } from "@/models/user.model";
-import { SignInFormData, SignInResponseData } from "@/types/auth.data-types";
+import { SignInFormData, SignInResponseData } from "@/common/types";
 import { Collection, Document } from "mongodb";
 
 type UpdateUserResult = { acknowledged: boolean } & SignInResponseData;

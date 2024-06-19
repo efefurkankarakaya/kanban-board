@@ -9,10 +9,12 @@ import SidePanel from "../side-panel/SidePanel";
 import useTaskStore from "@/store/task.store";
 import sendGetBoardRequest from "@/calls/board/get-board";
 import { IBoardModel } from "@/models/board.model";
+import { IColumnModel } from "@/models/column.model";
 
 const Board = () => {
   const pathname = usePathname();
   const [board, setBoard] = useState<IBoardModel>();
+  const [column, setColumn] = useState<IColumnModel>();
   const updateTasks = useTaskStore((state) => state.updateTasks);
 
   useEffect(() => {

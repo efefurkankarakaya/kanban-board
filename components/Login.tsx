@@ -1,7 +1,7 @@
 "use client";
 
 import { sendSignInRequest } from "@/calls/user/account";
-import { SignInFormData, SignInResponseData } from "@/types/auth.data-types";
+import { SignInFormData, SignInResponseData } from "@/common/types";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";

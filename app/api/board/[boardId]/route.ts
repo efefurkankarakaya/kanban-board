@@ -1,4 +1,4 @@
-import { CustomAPIResponse } from "@/common/types";
+import { CustomAPIResponse, DynamicAPIArgument } from "@/common/types";
 import { IBoardModel } from "@/models/board.model";
 import { databaseName, databaseURI } from "@/persistence/database";
 import { MongoClient } from "mongodb";
@@ -7,11 +7,7 @@ type Params = {
   boardId: string;
 };
 
-interface Dynamic {
-  params: Params;
-}
-
-export async function GET(request: Request, { params }: Dynamic) {
+export async function GET(request: Request, { params }: DynamicAPIArgument<Params>) {
   // Each user has their own board, so basically user names are actually visible board ids
   const { boardId: userName } = params;
 

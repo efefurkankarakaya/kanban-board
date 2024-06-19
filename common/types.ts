@@ -2,6 +2,10 @@ import { IBoardModel } from "@/models/board.model";
 import { IColumnModel } from "@/models/column.model";
 import { IUserModel } from "@/models/user.model";
 
+export type DynamicAPIArgument<T> = {
+  params: T;
+};
+
 export type CustomAPIResponse<T> = {
   status: number;
   data: T | Record<never, never>;

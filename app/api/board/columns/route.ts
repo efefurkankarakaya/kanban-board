@@ -1,5 +1,4 @@
 import { CustomAPIResponse, RequestAllColumns, RequestColumnData } from "@/common/types";
-import { IBoardModel } from "@/models/board.model";
 import { IColumnModel } from "@/models/column.model";
 import { databaseName, databaseURI } from "@/persistence/database";
 import { MongoClient, ObjectId } from "mongodb";

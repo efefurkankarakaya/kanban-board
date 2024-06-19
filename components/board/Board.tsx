@@ -3,7 +3,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
 import Column from "./Column";
-import { data } from "@/data/tasks";
 import Link from "next/link";
 import SidePanel from "../side-panel/SidePanel";
 import useTaskStore from "@/store/task.store";
@@ -17,10 +16,8 @@ const Board = () => {
   const pathname = usePathname();
   const [board, setBoard] = useState<IBoardModel>({} as IBoardModel);
   const [columns, setColumns] = useState<IColumnModel[]>([]);
-  // const columns = useMemo(() => {}) // TODO: Refactor
   const updateTasks = useTaskStore((state) => state.updateTasks);
 
-  // TODO: Refactor
   useEffect(() => {
     const userName = pathname.split("board/")[1];
 
@@ -34,7 +31,6 @@ const Board = () => {
       .then((data) => setColumns(data))
       .catch((error) => console.log(error));
 
-    // updateTasks(data);
     sendGetTasksRequest(board._id)
       .then((response) => response.json())
       .then((data) => updateTasks(data))
@@ -65,22 +61,6 @@ const Board = () => {
               columnId={column._id}
             />
           ))}
-          {/* <Column
-            title="Backlog"
-            columnId="backlog"
-          />
-          <Column
-            title="To do"
-            columnId="todo"
-          />
-          <Column
-            title="In progress"
-            columnId="in-progress"
-          />
-          <Column
-            title="Done"
-            columnId="done"
-          /> */}
         </div>
       </div>
       <SidePanel />

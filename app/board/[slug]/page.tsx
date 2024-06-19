@@ -13,21 +13,16 @@ interface Props {
 const Detail = ({ params }: Props) => {
   return (
     <main>
-      <p>Board ID: {params.slug}</p>
-      <p>
-        <Link href="/">Home</Link>
-
-        <Kanban />
-        <Toaster
-          toastOptions={{
-            style: {
-              backgroundColor: "#262626",
-              color: "#fafafa"
-            }
-          }}
-          position="bottom-center"
-        />
-      </p>
+      <Kanban />
+      <Toaster
+        toastOptions={{
+          style: {
+            backgroundColor: "#262626",
+            color: "#fafafa"
+          }
+        }}
+        position="bottom-center"
+      />
     </main>
   );
 };

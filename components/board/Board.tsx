@@ -71,14 +71,15 @@ const Board = () => {
             />
           </h3>
           <div className="flex flex-row text-xs gap-1 ">
-            <p className="text-neutral-300">By Isaac N.C.</p>
+            <p className="text-neutral-300">Created by {userName}</p>
+            {/* <p className="text-neutral-300">By Isaac N.C.</p>
             <Link
               className="text-neutral-400"
               href="https://www.isaacnc.com/"
               target="_blank"
             >
               Visit website.
-            </Link>
+            </Link> */}
           </div>
         </div>
         <div className="flex gap-3">

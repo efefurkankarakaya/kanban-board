@@ -7,7 +7,7 @@ interface Props {
 
 const RowTitle = (props: Props) => {
   return (
-    <p className="flex flex-row text-neutral-400 font-light text-sm items-center">
+    <p className="flex flex-row text-neutral-400 font-light text-sm items-center truncate">
       <props.icon />
       &nbsp;{props.title}
     </p>

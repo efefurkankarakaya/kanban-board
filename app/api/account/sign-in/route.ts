@@ -9,6 +9,8 @@ import createBoard from "@/services/board/create-board";
 import { IColumnModel } from "@/models/column.model";
 import { ITaskModel } from "@/models/task.model";
 import createColumn from "@/services/board/create-column";
+import * as tasks from "@/data/tasks";
+import createTask from "@/services/board/create-task";
 
 type SignInResponse = {
   status: number;
@@ -52,6 +54,28 @@ export async function POST(request: Request) {
       const todo = await createColumn("To do", board._id, columnsCollection);
       const inProgress = await createColumn("In progress", board._id, columnsCollection);
       const done = await createColumn("Done", board._id, columnsCollection);
+
+      const columns = {
+        backlog: backlog._id,
+        todo: todo._id,
+        "in-progress": inProgress._id,
+        done: done._id
+      };
+
+      for (const task of tasks.data) {
+        const { _columnId, title, description, color, priority, tags } = task;
+
+        const taskData = {
+          _columnId: columns[_columnId as tasks.TaskColumnId],
+          title,
+          description,
+          color,
+          priority,
+          tags
+        };
+
+        await createTask(taskData, tasksCollection);
+      }
     }
 
     const { userName, lastLogin, acknowledged } = result;

@@ -1,5 +1,7 @@
 import { ITaskModel } from "@/models/task.model";
 
+export type TaskColumnId = "backlog" | "todo" | "in-progress" | "done"
+
 export const data: ITaskModel[] = [
   {
     _id: "1",
@@ -102,7 +104,7 @@ export const data: ITaskModel[] = [
   },
   {
     _id: "10",
-    _columnId: "in-progresss",
+    _columnId: "in-progress",
     title: "Tenth task",
     description: "Buy ingredients for breakfast.",
     color: "blue",

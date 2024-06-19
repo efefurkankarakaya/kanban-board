@@ -1,11 +1,14 @@
 import { ITaskModel } from "@/models/task.model";
 import { create } from "zustand";
 
+export type TUpdateTask = (taskData: Partial<ITaskModel>) => void;
+export type TUpdateTasks = (_tasks: ITaskModel[]) => void;
+
 interface TaskStore {
   task: ITaskModel;
   tasks: ITaskModel[];
-  updateTask: (taskData: Partial<ITaskModel>) => void;
-  updateTasks: (_tasks: ITaskModel[]) => void;
+  updateTask: TUpdateTask;
+  updateTasks: TUpdateTasks;
   resetTask: () => void;
 }
 
@@ -17,6 +20,7 @@ const initialState: ITaskModel = {
   color: "blue",
   priority: "",
   tags: [],
+  order: -1,
   createdAt: new Date(),
   editedAt: new Date(),
   completedAt: new Date()

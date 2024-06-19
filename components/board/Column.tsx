@@ -156,7 +156,9 @@ const Column = ({ title, columnId }: Props) => {
       </div>
       <CreateTask
         columnId={columnId}
-        setTasks={updateTasks}
+        tasks={tasks}
+        updateTasks={updateTasks}
+        newTaskIndex={filteredTasks.length}
       />
     </div>
   );

@@ -59,7 +59,7 @@ export async function POST(request: Request) {
       };
 
       for (const task of tasks.data) {
-        const { _columnId, title, description, color, priority, tags } = task;
+        const { _columnId, title, description, color, priority, tags, order } = task;
 
         const taskData = {
           _columnId: columns[_columnId as tasks.TaskColumnId],
@@ -67,7 +67,8 @@ export async function POST(request: Request) {
           description,
           color,
           priority,
-          tags
+          tags,
+          order
         };
 
         await createTask(taskData, tasksCollection);

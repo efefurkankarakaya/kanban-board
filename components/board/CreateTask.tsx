@@ -5,13 +5,17 @@ import { motion } from "framer-motion";
 import { useClickAway } from "react-use";
 import { FiPlus } from "react-icons/fi";
 import { ITaskModel } from "@/models/task.model";
+import { TUpdateTasks } from "@/store/task.store";
+import sendCreateTaskRequest from "@/calls/board/create-task";
 
 interface Props {
   columnId: string;
-  setTasks: any;
+  tasks: ITaskModel[];
+  updateTasks: TUpdateTasks;
+  newTaskIndex: number;
 }
 
-const CreateTask = ({ columnId, setTasks }: Props) => {
+const CreateTask = ({ columnId, tasks, updateTasks, newTaskIndex }: Props) => {
   const [title, setTitle] = useState("");
   const [isCreateMode, setIsCreateMode] = useState(false);
   const ref = useRef(null);
@@ -42,15 +46,26 @@ const CreateTask = ({ columnId, setTasks }: Props) => {
     setTitle("");
   };
 
-  const createTask = () => {
+  const createTask = async () => {
     if (title.trim().length) {
       const task = {
-        _id: Math.random().toString(),
         _columnId: columnId,
-        title: title.trim()
-      };
+        title: title.trim(),
+        description: "",
+        color: "blue",
+        priority: "",
+        tags: [],
+        order: newTaskIndex,
+        createdAt: new Date(),
+        editedAt: new Date()
+      } as unknown as ITaskModel;
 
-      setTasks((previous: ITaskModel[]) => [...previous, task]);
+      const response = await sendCreateTaskRequest(task);
+      const data = await response.json();
+      task._id = data.insertedId;
+
+      tasks.push(task);
+      updateTasks([...tasks]);
     }
 
     clearTitle();

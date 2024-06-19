@@ -9,10 +9,10 @@ type TaskData = {
   color: TaskColor;
   priority: string;
   tags: string[];
+  order: number;
 };
 
 type TaskCreationData = {
-  title: string;
   createdAt: Date;
   editedAt: Date;
 } & TaskData;

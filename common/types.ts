@@ -11,6 +11,8 @@ export type CustomAPIResponse<T> = {
   data: T | Record<never, never>;
 };
 
+export type EmptyObject = Record<never, never>;
+
 export type UpdateBoardData = {
   title: IBoardModel["title"];
 };

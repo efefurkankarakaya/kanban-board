@@ -1,19 +1,18 @@
-import { CustomAPIResponse, DynamicAPIArgument } from "@/common/types";
+import { CustomAPIResponse } from "@/common/types";
 import { ITaskModel } from "@/models/task.model";
 import { databaseName, databaseURI } from "@/persistence/database";
-import { MongoClient, ObjectId } from "mongodb";
+import { BulkWriteResult, MongoClient, ObjectId } from "mongodb";
 
 export async function PATCH(request: Request) {
-  const response: CustomAPIResponse<ITaskModel> = {
+  const response: CustomAPIResponse<BulkWriteResult> = {
     status: 500,
-    data: {} as ITaskModel
+    data: {} as BulkWriteResult
   };
 
   const client = new MongoClient(databaseURI);
 
   try {
     const tasks: ITaskModel[] = await request.json();
-    console.log(tasks);
 
     tasks.forEach((task) => {
       // @ts-ignore
@@ -34,7 +33,7 @@ export async function PATCH(request: Request) {
     // @ts-ignore: ObjectId is required for the bulk update.
     const result = await db.collection<ITaskModel>("tasks").bulkWrite(bulkUpdate);
 
-    response.data = {};
+    response.data = result;
     response.status = 200;
   } catch (error) {
     console.log(error);

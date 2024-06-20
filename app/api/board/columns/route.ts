@@ -1,4 +1,4 @@
-import { CustomAPIResponse, RequestAllColumns, RequestColumnData } from "@/common/types";
+import { CustomAPIResponse, GetAllColumnsBody } from "@/common/types";
 import { IColumnModel } from "@/models/column.model";
 import { databaseName, databaseURI } from "@/persistence/database";
 import { MongoClient, ObjectId } from "mongodb";
@@ -12,8 +12,7 @@ export async function POST(request: Request) {
   const client = new MongoClient(databaseURI);
 
   try {
-    const data: RequestAllColumns = await request.json();
-    console.log(data);
+    const data: GetAllColumnsBody = await request.json();
 
     await client.connect();
     const db = client.db(databaseName);

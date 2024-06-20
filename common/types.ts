@@ -25,7 +25,7 @@ export type RequestColumnData = {
   columnId: IColumnModel["_id"];
 };
 
-export type RequestAllColumns = {
+export type GetAllColumnsBody = {
   boardId: IColumnModel["_boardId"];
 };
 

@@ -1,6 +1,8 @@
+import { GetAllColumnsBody } from "@/common/types";
+
 const sendGetColumnsRequest = async (boardId: string): Promise<Response> => {
   const endpoint = "/api/board/columns";
-  const data = { boardId };
+  const data: GetAllColumnsBody = { boardId };
   const body = JSON.stringify(data);
 
   return await fetch(endpoint, {

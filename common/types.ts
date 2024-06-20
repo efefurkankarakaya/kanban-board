@@ -1,5 +1,6 @@
 import { IBoardModel } from "@/models/board.model";
 import { IColumnModel } from "@/models/column.model";
+import { ITaskModel } from "@/models/task.model";
 import { IUserModel } from "@/models/user.model";
 
 export type DynamicAPIArgument<T> = {
@@ -21,8 +22,14 @@ export type RequestAllTasks = {
   boardId: IBoardModel["_id"];
 };
 
-export type RequestColumnData = {
-  columnId: IColumnModel["_id"];
+export type UpdateTaskBody = {
+  title?: ITaskModel["title"];
+  description?: ITaskModel["description"];
+  color?: ITaskModel["color"];
+  priority?: ITaskModel["priority"];
+  tags?: ITaskModel["tags"];
+  order?: ITaskModel["order"];
+  completedAt?: ITaskModel["completedAt"];
 };
 
 export type GetAllColumnsBody = {

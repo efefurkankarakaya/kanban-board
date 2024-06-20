@@ -1,8 +1,9 @@
 import { TaskColor } from "@/common/color";
 import { IColumnModel } from "./column.model";
+import { ObjectId } from "mongodb";
 
-export interface ITaskModel {
-  _id: string;
+export interface ITaskDocument {
+  _id: ObjectId;
   _columnId: IColumnModel["_id"];
   title: string;
   description: string;
@@ -13,6 +14,11 @@ export interface ITaskModel {
   completedAt?: Date;
   createdAt: Date;
   editedAt: Date;
+}
+
+export interface ITaskModel extends Omit<ITaskDocument, "_id" | "_columnId"> {
+  _id: string;
+  _columnId: string;
 }
 
 export class TaskModel implements ITaskModel {

@@ -1,6 +1,6 @@
-import { ITaskModel } from "@/models/task.model";
+import { UpdateTaskBody } from "@/common/types";
 
-const sendUpdateTaskRequest = async (taskId: string, data: Partial<ITaskModel>): Promise<Response> => {
+const sendUpdateTaskRequest = async (taskId: string, data: UpdateTaskBody): Promise<Response> => {
   const endpoint = `/api/board/task/${taskId}`;
   const body = JSON.stringify(data);
 

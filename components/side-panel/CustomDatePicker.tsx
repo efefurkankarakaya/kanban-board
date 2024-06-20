@@ -1,4 +1,5 @@
 import sendUpdateTaskRequest from "@/calls/board/update-task";
+import { UpdateTaskBody } from "@/common/types";
 import { ITaskModel } from "@/models/task.model";
 import { KeyboardEvent, MouseEvent } from "react";
 import DatePicker from "react-datepicker";
@@ -15,8 +16,7 @@ const CustomDatePicker = ({ taskId, completedAt, updateTask }: Props) => {
     date: Date | null,
     event?: MouseEvent<HTMLElement, globalThis.MouseEvent> | KeyboardEvent<HTMLElement> | undefined
   ) => {
-    const data = { completedAt: date || undefined };
-
+    const data: UpdateTaskBody = { completedAt: date || undefined };
     updateTask(data);
     await sendUpdateTaskRequest(taskId, data);
   };

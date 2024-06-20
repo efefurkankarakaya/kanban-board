@@ -11,6 +11,7 @@ import { TaskColor, TaskColorClassName } from "@/common/color";
 import { MouseEvent } from "react";
 import sendUpdateTaskRequest from "@/calls/board/update-task";
 import CustomDatePicker from "./CustomDatePicker";
+import { UpdateTaskBody } from "@/common/types";
 
 interface Props {
   activeTask: ITaskModel;
@@ -19,7 +20,7 @@ interface Props {
 
 const DetailTable = ({ activeTask, updateTask }: Props) => {
   const onClickColor = async (e: MouseEvent<HTMLButtonElement>, color: TaskColor) => {
-    const data = { color };
+    const data: UpdateTaskBody = { color };
     updateTask(data);
     await sendUpdateTaskRequest(activeTask._id, data);
   };

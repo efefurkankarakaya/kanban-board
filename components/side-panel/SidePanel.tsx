@@ -9,6 +9,7 @@ import SidePanelHeader from "./Header";
 import useDimensions from "@/hooks/useDimensions";
 import DetailTable from "./DetailTable";
 import sendUpdateTaskRequest from "@/calls/board/update-task";
+import { UpdateTaskBody } from "@/common/types";
 
 interface Props {}
 
@@ -18,7 +19,8 @@ const SidePanel = (props: Props) => {
   const [activeTask, updateTask, resetTask] = useTaskStore((state) => [state.task, state.updateTask, state.resetTask]);
 
   useClickAway(ref, async () => {
-    await sendUpdateTaskRequest(activeTask._id, { title: activeTask.title, description: activeTask.description });
+    const data: UpdateTaskBody = { title: activeTask.title, description: activeTask.description };
+    await sendUpdateTaskRequest(activeTask._id, data);
     resetTask();
   });
 

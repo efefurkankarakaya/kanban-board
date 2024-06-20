@@ -4,7 +4,6 @@ import { ITaskModel } from "@/models/task.model";
 import Task from "./Task";
 import CreateTask from "./CreateTask";
 import useTaskStore from "@/store/task.store";
-import sendUpdateTaskRequest from "@/calls/board/update-task";
 import sendReorderTaskRequest from "@/calls/board/reorder-task";
 
 type Indicator = {
@@ -108,7 +107,6 @@ const Column = ({ title, columnId }: Props) => {
         copy.splice(insertAtIndex, 0, transfer);
       }
 
-      // await sendUpdateTaskRequest(transfer._id, { _columnId: columnId });
       await sendReorderTaskRequest(copy);
       updateTasks(copy);
     }

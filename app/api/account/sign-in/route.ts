@@ -1,4 +1,4 @@
-import { CustomAPIResponse, SignInFormData, SignInResponseData } from "@/common/types";
+import { CustomAPIResponse, SignInBody, SignInResponseData } from "@/common/types";
 import { IUserModel, UserCreationData } from "@/models/user.model";
 import { databaseName, databaseURI } from "@/persistence/database";
 import { MongoClient, WithId } from "mongodb";
@@ -22,7 +22,7 @@ export async function POST(request: Request) {
   const client = new MongoClient(databaseURI);
 
   try {
-    const data: SignInFormData = await request.json();
+    const data: SignInBody = await request.json();
 
     await client.connect();
     const db = client.db(databaseName);

@@ -1,7 +1,7 @@
 "use client";
 
 import { sendSignInRequest } from "@/calls/user/account";
-import { SignInFormData, SignInResponseData } from "@/common/types";
+import { SignInBody, SignInResponseData } from "@/common/types";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
@@ -19,7 +19,7 @@ const Login = (props: Props) => {
     const formData = new FormData(e.currentTarget);
     const userName = formData.get("userName") as string;
 
-    const data: SignInFormData = { userName };
+    const data: SignInBody = { userName };
 
     const response = await sendSignInRequest(data);
     if (response.status === 200) {

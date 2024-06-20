@@ -1,10 +1,10 @@
-import { IUserModel, UserCreationData } from "@/models/user.model";
-import { SignInFormData, SignInResponseData } from "@/common/types";
+import { IUserModel } from "@/models/user.model";
+import { SignInBody, SignInResponseData } from "@/common/types";
 import { Collection, Document } from "mongodb";
 
 type UpdateUserResult = { acknowledged: boolean } & SignInResponseData;
 
-const updateUser = async (data: SignInFormData, users: Collection<Document & IUserModel>): Promise<UpdateUserResult> => {
+const updateUser = async (data: SignInBody, users: Collection<Document & IUserModel>): Promise<UpdateUserResult> => {
   const { userName } = data;
 
   const filter = { userName };

@@ -1,10 +1,10 @@
-import { SignInFormData } from "@/common/types";
+import { SignInBody } from "@/common/types";
 
 const URLPrefix = "/api/account";
 
 export const sendGetUserByNameRequest = () => {};
 
-export const sendSignInRequest = async (data: SignInFormData) => {
+export const sendSignInRequest = async (data: SignInBody) => {
   const endpoint = URLPrefix + "/sign-in";
 
   return await fetch(endpoint, {

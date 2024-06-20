@@ -3,6 +3,8 @@ import { IColumnModel } from "@/models/column.model";
 import { ITaskModel } from "@/models/task.model";
 import { IUserModel } from "@/models/user.model";
 
+export type EmptyObject = Record<never, never>;
+
 export type DynamicAPIArgument<T> = {
   params: T;
 };
@@ -12,10 +14,12 @@ export type CustomAPIResponse<T> = {
   data: T | Record<never, never>;
 };
 
-export type EmptyObject = Record<never, never>;
-
 export type UpdateBoardData = {
   title: IBoardModel["title"];
+};
+
+export type GetAllColumnsBody = {
+  boardId: IColumnModel["_boardId"];
 };
 
 export type GetAllTasksBody = {
@@ -34,24 +38,15 @@ export type UpdateTaskBody = {
   completedAt?: ITaskModel["completedAt"];
 };
 
-export type GetAllColumnsBody = {
-  boardId: IColumnModel["_boardId"];
-};
-
-export type SignInFormData = {
+export type SignInBody = {
   userName: IUserModel["userName"];
 };
 
-export type SignUpFormData = {
+export type SignUpBody = {
   userName: IUserModel["userName"];
 };
 
 export type SignInResponseData = {
-  userName: IUserModel["userName"];
-  lastLogin: IUserModel["lastLogin"];
-};
-
-export type SignUpResponseData = {
   userName: IUserModel["userName"];
   lastLogin: IUserModel["lastLogin"];
 };

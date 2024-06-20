@@ -1,10 +1,10 @@
 import { IUserModel, UserCreationData } from "@/models/user.model";
-import { SignUpFormData } from "@/common/types";
+import { SignUpBody } from "@/common/types";
 import { Collection, Document } from "mongodb";
 
 type CreateUserResult = { acknowledged: boolean } & IUserModel;
 
-const createUser = async (data: SignUpFormData, users: Collection<Document & IUserModel>): Promise<CreateUserResult> => {
+const createUser = async (data: SignUpBody, users: Collection<Document & IUserModel>): Promise<CreateUserResult> => {
   const newUser: UserCreationData = {
     ...data,
     createdAt: new Date(),

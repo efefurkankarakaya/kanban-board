@@ -1,5 +1,5 @@
-import { CustomAPIResponse, DynamicAPIArgument } from "@/common/types";
-import { ITaskModel } from "@/models/task.model";
+import { CreateTaskBody, CustomAPIResponse, DynamicAPIArgument } from "@/common/types";
+import { ITaskDocument, ITaskModel } from "@/models/task.model";
 import { databaseName, databaseURI } from "@/persistence/database";
 import { MongoClient, ObjectId } from "mongodb";
 
@@ -12,13 +12,14 @@ export async function POST(request: Request) {
   const client = new MongoClient(databaseURI);
 
   try {
-    const data: ITaskModel = await request.json();
+    const data: CreateTaskBody = await request.json();
 
     await client.connect();
     const db = client.db(databaseName);
-    const task = await db.collection<ITaskModel>("tasks").insertOne({
+
+    // @ts-ignore: MongoDB inserts _id value when creating new document
+    const task = await db.collection<ITaskDocument>("tasks").insertOne({
       ...data,
-      // @ts-ignore
       _columnId: new ObjectId(data._columnId)
     });
 

@@ -1,12 +1,21 @@
 // import { IUserDTO } from "@/dto/user/auth.dto";
 
+import { ObjectId } from "mongodb";
+
 export interface UserCreationData {
   userName: string;
   createdAt: Date;
   lastLogin: Date;
 }
 
-export interface IUserModel extends UserCreationData {
+export interface IUserDocument {
+  _id: ObjectId;
+  userName: string;
+  createdAt: Date;
+  lastLogin: Date;
+}
+
+export interface IUserModel extends Omit<IUserDocument, "_id"> {
   _id: string;
 }
 

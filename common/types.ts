@@ -22,6 +22,8 @@ export type RequestAllTasks = {
   boardId: IBoardModel["_id"];
 };
 
+export type CreateTaskBody = Omit<ITaskModel, "_id">;
+
 export type UpdateTaskBody = {
   title?: ITaskModel["title"];
   description?: ITaskModel["description"];

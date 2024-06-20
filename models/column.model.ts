@@ -1,10 +1,15 @@
 import { ObjectId } from "mongodb";
-import { IBoardModel } from "./board.model";
+import { IBoardDocument, IBoardModel } from "./board.model";
 
-export interface IColumnModel {
-  _id: string;
-  _boardId: IBoardModel["_id"];
+export interface IColumnDocument {
+  _id: ObjectId;
+  _boardId: IBoardDocument["_id"];
   title: string;
   createdAt: Date;
   editedAt: Date;
+}
+
+export interface IColumnModel extends Omit<IColumnDocument, "_id" | "_boardId"> {
+  _id: string;
+  _boardId: IBoardModel["_id"];
 }

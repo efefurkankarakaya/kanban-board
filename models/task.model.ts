@@ -1,10 +1,10 @@
 import { TaskColor } from "@/common/color";
-import { IColumnModel } from "./column.model";
+import { IColumnDocument, IColumnModel } from "./column.model";
 import { ObjectId } from "mongodb";
 
 export interface ITaskDocument {
   _id: ObjectId;
-  _columnId: IColumnModel["_id"];
+  _columnId: IColumnDocument["_id"];
   title: string;
   description: string;
   color: TaskColor;
@@ -18,7 +18,7 @@ export interface ITaskDocument {
 
 export interface ITaskModel extends Omit<ITaskDocument, "_id" | "_columnId"> {
   _id: string;
-  _columnId: string;
+  _columnId: IColumnModel["_id"];
 }
 
 export class TaskModel implements ITaskModel {

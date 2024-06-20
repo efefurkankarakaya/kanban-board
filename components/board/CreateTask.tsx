@@ -7,6 +7,7 @@ import { FiPlus } from "react-icons/fi";
 import { ITaskModel } from "@/models/task.model";
 import { TUpdateTasks } from "@/store/task.store";
 import sendCreateTaskRequest from "@/calls/board/create-task";
+import { CreateTaskBody } from "@/common/types";
 
 interface Props {
   columnId: string;
@@ -48,7 +49,7 @@ const CreateTask = ({ columnId, tasks, updateTasks, newTaskIndex }: Props) => {
 
   const createTask = async () => {
     if (title.trim().length) {
-      const task = {
+      const taskData: CreateTaskBody = {
         _columnId: columnId,
         title: title.trim(),
         description: "",
@@ -58,11 +59,12 @@ const CreateTask = ({ columnId, tasks, updateTasks, newTaskIndex }: Props) => {
         order: newTaskIndex,
         createdAt: new Date(),
         editedAt: new Date()
-      } as unknown as ITaskModel;
+      };
 
-      const response = await sendCreateTaskRequest(task);
+      const response = await sendCreateTaskRequest(taskData);
       const data = await response.json();
-      task._id = data.insertedId;
+
+      const task: ITaskModel = { _id: data.insertedId, ...taskData };
 
       tasks.push(task);
       updateTasks([...tasks]);

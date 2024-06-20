@@ -1,6 +1,8 @@
+import { GetAllTasksBody } from "@/common/types";
+
 const sendGetTasksRequest = async (boardId: string): Promise<Response> => {
   const endpoint = "/api/board/tasks";
-  const data = { boardId };
+  const data: GetAllTasksBody = { boardId };
   const body = JSON.stringify(data);
 
   return await fetch(endpoint, {

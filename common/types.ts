@@ -18,7 +18,7 @@ export type UpdateBoardData = {
   title: IBoardModel["title"];
 };
 
-export type RequestAllTasks = {
+export type GetAllTasksBody = {
   boardId: IBoardModel["_id"];
 };
 

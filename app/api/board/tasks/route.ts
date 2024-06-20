@@ -1,4 +1,4 @@
-import { CustomAPIResponse, RequestAllTasks } from "@/common/types";
+import { CustomAPIResponse, GetAllTasksBody } from "@/common/types";
 import { ITaskModel } from "@/models/task.model";
 import { databaseName, databaseURI } from "@/persistence/database";
 import { MongoClient, ObjectId } from "mongodb";
@@ -12,7 +12,7 @@ export async function POST(request: Request) {
   const client = new MongoClient(databaseURI);
 
   try {
-    const data: RequestAllTasks = await request.json();
+    const data: GetAllTasksBody = await request.json();
 
     await client.connect();
     const db = client.db(databaseName);

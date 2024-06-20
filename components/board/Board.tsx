@@ -3,7 +3,6 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Column from "./Column";
-import Link from "next/link";
 import SidePanel from "../side-panel/SidePanel";
 import useTaskStore from "@/store/task.store";
 import sendGetBoardRequest from "@/calls/board/get-board";
@@ -26,6 +25,22 @@ const Board = () => {
   const updateTasks = useTaskStore((state) => state.updateTasks);
 
   useEffect(() => {
+    // const prepare = async () => {
+    //   let response;
+
+    //   response = await sendGetBoardRequest(userName);
+    //   const _board: IBoardModel = await response.json();
+    //   setBoard(_board);
+
+    //   response = await sendGetColumnsRequest(_board._id);
+    //   const _columns: IColumnModel[] = await response.json();
+    //   setColumns(_columns);
+
+    //   response = await sendGetTasksRequest(_board._id);
+    //   const _tasks: ITaskModel[] = await response.json();
+    //   updateTasks(_tasks);
+    // };
+    // prepare().then(() => console.log("Board is ready."));
     sendGetBoardRequest(userName)
       .then((response) => response.json())
       .then((data) => setBoard(data))

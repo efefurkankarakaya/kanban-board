@@ -23,7 +23,7 @@ const initialState: ITaskModel = {
   order: -1,
   createdAt: new Date(),
   editedAt: new Date(),
-  completedAt: new Date()
+  completedAt: undefined
 };
 
 const useTaskStore = create<TaskStore>((set) => ({

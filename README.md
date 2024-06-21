@@ -2,6 +2,14 @@
 
 A Notion-like full-stack kanban board application built on Next.js, Zustand and MongoDB.
 
+### Board
+
+<img src="./docs/screenshots/board.png">
+
+### Detail
+
+<img src="./docs/screenshots/detail.png">
+
 ### Installation
 
 #### Initial Steps

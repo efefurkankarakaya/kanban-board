@@ -14,10 +14,10 @@ const initialState: IUserModel = {
   lastLogin: new Date()
 };
 
-const useTaskStore = create<UserStore>((set) => ({
+const useUserStore = create<UserStore>((set) => ({
   user: initialState,
   updateUser: (userData: Partial<IUserModel>) => set((state) => ({ user: { ...state.user, ...userData } })),
   resetUser: () => set((state) => ({ ...state, user: { ...initialState } }))
 }));
 
-export default useTaskStore;
+export default useUserStore;

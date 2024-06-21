@@ -19,6 +19,7 @@ A Notion-like full-stack kanban board application built on Next.js, Zustand and 
 #### Running the database (MongoDB instance)
 
 - Clone the repository: `$ git clone https://github.com/efefurkankarakaya/kanban-board`
+- Go inside the directory: `$ cd kanban-board/`
 - Start the MongoDB instance in your local: `$ docker compose up`
 - Then the local MongoDB instance will be available at `http://localhost:27017`.
 - Also, MongoDB Express (admin panel) will be available at `http://localhost:8081`. But, I'd recommend you to use <a href="https://www.mongodb.com/products/tools/compass">MongoDB Compass</a> to access the MongoDB server.

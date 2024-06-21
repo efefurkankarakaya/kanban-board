@@ -50,7 +50,7 @@ const Login = (props: Props) => {
 
   return (
     <motion.div
-      className="flex flex-wrap justify-center items-center h-screen w-full"
+      className="flex flex-wrap justify-center items-center h-screen w-full bg-neutral-900"
       initial={{ opacity: 0, scale: 0.5 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5 }}

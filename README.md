@@ -10,6 +10,12 @@ A Notion-like full-stack kanban board application built on Next.js, Zustand and 
 
 <img src="./docs/screenshots/detail.png">
 
+### Sign In / Sign Up
+
+<img src="./docs/screenshots/sign-in.png">
+
+Sign-in and Sign-up both functions are handled in the same screen, if a user does not exist, then the user will be created with their initial board data. And their board url will be publicly available over their user name.
+
 ### Installation
 
 #### Initial Steps

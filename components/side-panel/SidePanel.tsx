@@ -11,6 +11,7 @@ import DetailTable from "./DetailTable";
 import DetailTitle from "./DetailTitle";
 import DetailDescription from "./DetailDescription";
 import sendUpdateTaskRequest from "@/calls/board/update-task";
+import { UpdateTaskBody } from "@/common/types";
 
 interface Props {}
 

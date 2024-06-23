@@ -1,11 +1,9 @@
 "use client";
 
 import { FiLoader } from "react-icons/fi";
-import RowTitle from "./RowTitle";
 import { WiTime9 } from "react-icons/wi";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { ITaskModel } from "@/models/task.model";
-import CopyButton from "./CopyButton";
 import { IoColorPaletteOutline } from "react-icons/io5";
 import { TaskColor, TaskColorClassName } from "@/common/color";
 import { MouseEvent, useMemo } from "react";
@@ -14,6 +12,7 @@ import CustomDatePicker from "./CustomDatePicker";
 import { UpdateTaskBody } from "@/common/types";
 import useTaskStore from "@/store/task.store";
 import useColumnStore from "@/store/column.store";
+import DetailTableRow from "./DetailTableRow";
 
 interface Props {
   activeTask: ITaskModel;
@@ -37,87 +36,59 @@ const DetailTable = ({ activeTask }: Props) => {
   return (
     <table className="table-auto">
       <tbody className="[&>tr>td]:p-2">
-        <tr className="hover:bg-neutral-600/50">
-          <td>
-            <RowTitle
-              title="Status"
-              icon={FiLoader}
-            />
-          </td>
-          <td className="text-sm rounded-sm">{columnName}</td>
-          <td className="text-neutral-400">
-            <CopyButton text={columnName || ""} />
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <RowTitle
-              title="Created At"
-              icon={WiTime9}
-            />
-          </td>
-          <td className="text-sm">{new Date(activeTask.createdAt).toDateString()}</td>
-          <td className="text-neutral-400">
-            <CopyButton text={new Date(activeTask.createdAt).toDateString()} />
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <RowTitle
-              title="Edited At"
-              icon={WiTime9}
-            />
-          </td>
-          <td className="text-sm">{new Date(activeTask.editedAt).toDateString()}</td>
-          <td className="text-neutral-400">
-            <CopyButton text={new Date(activeTask.editedAt).toDateString()} />
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <RowTitle
-              title="Completed At"
-              icon={FaRegCalendarAlt}
-            />
-          </td>
-          <td className="text-sm">
-            <CustomDatePicker
-              taskId={activeTask._id}
-              completedAt={activeTask.completedAt}
-              updateTask={updateTask}
-            />
-          </td>
-          <td className="text-neutral-400">
-            <CopyButton text={activeTask.completedAt ? new Date(activeTask.completedAt).toDateString() : ""} />
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <RowTitle
-              title="Color"
-              icon={IoColorPaletteOutline}
-            />
-          </td>
-          <td className="text-sm">
-            <div>
-              {Object.keys(TaskColorClassName).map((color, index) => {
-                return (
-                  <button
-                    onClick={(e) => onClickColor(e, color as TaskColor)}
-                    title={color.charAt(0).toUpperCase() + color.slice(1)}
-                    key={index}
-                    className={`${TaskColorClassName[color as TaskColor]} p-3 rounded-md mr-1 ${
-                      activeTask.color === color ? "border-neutral-200 border-2" : ""
-                    }`}
-                  ></button>
-                );
-              })}
-            </div>
-          </td>
-          <td className="text-neutral-400">
-            <CopyButton text={activeTask.completedAt ? new Date(activeTask.completedAt).toDateString() : ""} />
-          </td>
-        </tr>
+        <DetailTableRow
+          title="Status"
+          titleIcon={FiLoader}
+          clipboardText={columnName || ""}
+        >
+          {columnName || ""}
+        </DetailTableRow>
+
+        <DetailTableRow
+          title="Created At"
+          titleIcon={WiTime9}
+          clipboardText={new Date(activeTask.createdAt).toDateString()}
+        >
+          {new Date(activeTask.createdAt).toDateString()}
+        </DetailTableRow>
+        <DetailTableRow
+          title="Edited At"
+          titleIcon={WiTime9}
+          clipboardText={new Date(activeTask.editedAt).toDateString()}
+        >
+          {new Date(activeTask.editedAt).toDateString()}
+        </DetailTableRow>
+        <DetailTableRow
+          title="Completed At"
+          titleIcon={FaRegCalendarAlt}
+          clipboardText={activeTask.completedAt ? new Date(activeTask.completedAt).toDateString() : ""}
+        >
+          <CustomDatePicker
+            taskId={activeTask._id}
+            completedAt={activeTask.completedAt}
+            updateTask={updateTask}
+          />
+        </DetailTableRow>
+        <DetailTableRow
+          title="Color"
+          titleIcon={IoColorPaletteOutline}
+          clipboardText={activeTask.color}
+        >
+          <div>
+            {Object.keys(TaskColorClassName).map((color, index) => {
+              return (
+                <button
+                  onClick={(e) => onClickColor(e, color as TaskColor)}
+                  title={color.charAt(0).toUpperCase() + color.slice(1)}
+                  key={index}
+                  className={`${TaskColorClassName[color as TaskColor]} p-3 rounded-md mr-1 ${
+                    activeTask.color === color ? "border-neutral-200 border-2" : ""
+                  }`}
+                ></button>
+              );
+            })}
+          </div>
+        </DetailTableRow>
       </tbody>
     </table>
   );

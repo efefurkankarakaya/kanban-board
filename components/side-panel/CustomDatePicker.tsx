@@ -23,7 +23,7 @@ const CustomDatePicker = ({ taskId, completedAt, updateTask }: Props) => {
 
   return (
     <DatePicker
-      className="bg-task-list cursor-pointer outline-none"
+      className="bg-transparent cursor-pointer outline-none"
       onChange={onChangeCompletedAt}
       placeholderText="Empty"
       value={completedAt ? new Date(completedAt).toDateString() : undefined}

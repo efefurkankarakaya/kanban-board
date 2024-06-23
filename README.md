@@ -8,7 +8,7 @@ A Notion-like full-stack kanban board application built on Next.js, Zustand and 
 
 ### Detail
 
-<img src="./docs/screenshots/detail.png">
+<img src="./docs/screenshots/detail-new.png">
 
 ### Sign In / Sign Up
 

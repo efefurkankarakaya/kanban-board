@@ -8,17 +8,26 @@ import { ITaskModel } from "@/models/task.model";
 import CopyButton from "./CopyButton";
 import { IoColorPaletteOutline } from "react-icons/io5";
 import { TaskColor, TaskColorClassName } from "@/common/color";
-import { MouseEvent } from "react";
+import { MouseEvent, useMemo } from "react";
 import sendUpdateTaskRequest from "@/calls/board/update-task";
 import CustomDatePicker from "./CustomDatePicker";
 import { UpdateTaskBody } from "@/common/types";
+import useTaskStore from "@/store/task.store";
+import useColumnStore from "@/store/column.store";
 
 interface Props {
   activeTask: ITaskModel;
-  updateTask: (data: Partial<ITaskModel>) => void;
 }
 
-const DetailTable = ({ activeTask, updateTask }: Props) => {
+const DetailTable = ({ activeTask }: Props) => {
+  const updateTask = useTaskStore((state) => state.updateTask);
+  const columns = useColumnStore((state) => state.columns);
+
+  const columnName = useMemo(() => {
+    // To get column name by its ID, each task has their column ID and this relationship allows us to access column data by its ID
+    return columns.find((column) => column._id === activeTask._columnId)?.title;
+  }, [columns, activeTask._columnId]);
+
   const onClickColor = async (e: MouseEvent<HTMLButtonElement>, color: TaskColor) => {
     const data: UpdateTaskBody = { color };
     updateTask(data);
@@ -35,10 +44,9 @@ const DetailTable = ({ activeTask, updateTask }: Props) => {
               icon={FiLoader}
             />
           </td>
-          {/* TODO: Zustand or GET getColumnDetail */}
-          <td className="text-sm rounded-sm">{activeTask._columnId}</td>
+          <td className="text-sm rounded-sm">{columnName}</td>
           <td className="text-neutral-400">
-            <CopyButton text={activeTask._columnId} />
+            <CopyButton text={columnName || ""} />
           </td>
         </tr>
         <tr>

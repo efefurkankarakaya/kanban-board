@@ -12,6 +12,7 @@ import sendGetColumnsRequest from "@/calls/board/get-columns";
 import sendGetTasksRequest from "@/calls/board/get-tasks";
 import { useClickAway } from "react-use";
 import sendUpdateBoardRequest from "@/calls/board/update-board";
+import useColumnStore from "@/store/column.store";
 
 const Board = () => {
   const ref = useRef(null);
@@ -22,7 +23,9 @@ const Board = () => {
   const [isDirty, setIsDirty] = useState(false);
   const [board, setBoard] = useState<IBoardModel>({} as IBoardModel);
   const [columns, setColumns] = useState<IColumnModel[]>([]);
+
   const updateTasks = useTaskStore((state) => state.updateTasks);
+  const updateColumns = useColumnStore((state) => state.updateColumns);
 
   useEffect(() => {
     // const prepare = async () => {
@@ -56,6 +59,10 @@ const Board = () => {
       .then((data) => updateTasks(data))
       .catch((error) => console.error(error));
   }, [userName, updateTasks, board._id]);
+
+  useEffect(() => {
+    updateColumns(columns);
+  }, [columns, updateColumns]);
 
   const onChangeHeader = (e: ChangeEvent<HTMLInputElement>) => {
     setBoard({ ...board, title: e.target.value });
